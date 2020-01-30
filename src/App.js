@@ -1,32 +1,47 @@
 import React from 'react';
 import './App.css';
-import { QuizList } from './components/QuizList';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import PetContextProvider from './components/context/PetContext';
+import QuizList from './components/quiz/QuizList';
+import Results from './components/Results';
 
-let TOKEN = null;
-fetch('https://api.petfinder.com/v2/oauth2/token', {
-  body: `grant_type=client_credentials&client_id=${process.env.REACT_APP_API_KEY}&client_secret=${process.env.REACT_APP_SECRET}`,
-  headers: {
-    'Content-Type': 'application/x-www-form-urlencoded'
-  },
-  method: 'POST'
-})
-  .then(res => res.json())
-  .then(data => {
-    console.log(data);
-    TOKEN = data.access_token;
-  });
+/* CONVERT TO ASYNC/AWAIT */
+// Sample URL: https://api.petfinder.com/v2/animals?location=20850&type=dog&breed=pug
 
-fetch('https://api.petfinder.com/v2/animals', {
-  headers: {
-    Authorization: `Bearer ${TOKEN}`
-  }
-}).then(res => console.log(res));
+// fetch('https://api.petfinder.com/v2/oauth2/token', {
+//   body: `grant_type=client_credentials&client_id=${process.env.REACT_APP_API_KEY}&client_secret=${process.env.REACT_APP_SECRET}`,
+//   headers: {
+//     'Content-Type': 'application/x-www-form-urlencoded'
+//   },
+//   method: 'POST'
+// })
+//   .then(res => res.json())
+//   .then(data => {
+//     console.log(data);
+//     return data.access_token;
+//   })
+//   .then(token => {
+//   fetch('https://api.petfinder.com/v2/animals/47201296', {
+//     headers: {
+//       Authorization: `Bearer ${token}`
+//     }
+//   })
+//     .then(res => res.json())
+//     .then(data => console.log(data));
+// });
 
 function App() {
   return (
-    <div>
-      <QuizList />
-    </div>
+    <Router>
+      <div>
+        <PetContextProvider>
+          <Switch>
+            <Route path='/' exact component={QuizList} />
+            <Route path='/results' exact component={Results} />
+          </Switch>
+        </PetContextProvider>
+      </div>
+    </Router>
   );
 }
 
