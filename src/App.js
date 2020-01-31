@@ -3,7 +3,8 @@ import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import PetContextProvider from './components/context/PetContext';
 import QuizList from './components/quiz/QuizList';
-import Results from './components/Results';
+import Results from './components/results/Results';
+import PetDetails from './components/results/PetDetails';
 
 /* CONVERT TO ASYNC/AWAIT */
 // Sample URL: https://api.petfinder.com/v2/animals?location=20850&type=dog&breed=pug
@@ -38,6 +39,7 @@ function App() {
           <Switch>
             <Route path='/' exact component={QuizList} />
             <Route path='/results' exact component={Results} />
+            <Route path='/results/:id' component={PetDetails} />
           </Switch>
         </PetContextProvider>
       </div>

@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { PetContext } from './context/PetContext';
+import styled from 'styled-components';
+import { PetContext } from '../context/PetContext';
+import PetCard from './PetCard';
 
 const Results = () => {
-  const { sizes, ages, genders } = useContext(PetContext);
+  const { sizes, ages, genders, setToken } = useContext(PetContext);
+  const [pets, setPets] = useState(null);
 
   useEffect(() => {
     async function fetchPets() {
@@ -44,9 +47,10 @@ const Results = () => {
       );
       const dataToken = await resToken.json();
       const TOKEN = dataToken.access_token;
+      setToken(TOKEN);
 
       const resPets = await fetch(
-        `https://api.petfinder.com/v2/animals?type=dog&status=adoptable&size=${sizesArray.join(
+        `https://api.petfinder.com/v2/animals?location=20850&type=dog&status=adoptable&size=${sizesArray.join(
           ','
         )}&age=${agesArray.join(',')}&gender=${gendersArray.join(',')}`,
         {
@@ -55,13 +59,49 @@ const Results = () => {
           }
         }
       );
-      const pets = resPets.json();
-      console.log(pets);
+      const pets = await resPets.json();
+
+      setPets(pets.animals);
     }
     fetchPets();
   }, []);
 
-  return <div>This are the results</div>;
+  const Container = styled.div`
+    max-width: 1200px;
+    margin: 2rem 1rem;
+
+    @media (min-width: 1200px) {
+      margin: 2rem auto;
+    }
+  `;
+
+  const Grid = styled.div`
+    display: grid;
+    grid-gap: 2rem;
+    margin: 2rem auto;
+    grid-template-columns: 1fr;
+
+    @media (min-width: 700px) {
+      grid-template-columns: 1fr 1fr;
+    }
+    @media (min-width: 900px) {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  `;
+
+  return (
+    <Container>
+      <h1>Results</h1>
+      <h2>Click on a pet to learn more!</h2>
+      <Grid>
+        {pets &&
+          pets.map(
+            pet =>
+              pet.photos.length > 0 && <PetCard key={pet.id} petInfo={pet} />
+          )}
+      </Grid>
+    </Container>
+  );
 };
 
 export default Results;
