@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { QuestionContainer, Label } from './form-styles';
+import { QuestionContainer, Label } from '../styles/styled-components';
 
 const QuizQuestion = ({ question, answers, handleChange, items }) => {
   return (

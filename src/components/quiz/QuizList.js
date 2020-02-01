@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import { PetContext } from '../context/PetContext';
 import styled from 'styled-components';
+import { PrimaryButton } from '../styles/styled-components';
 import CheckboxQuestion from './CheckboxQuestion';
 import RadioQuestion from './RadioQuestion';
 import InputQuestion from './InputQuestion';
@@ -108,7 +109,7 @@ const QuizList = props => {
 
   const radioQuestions = [
     {
-      question: "What's distance you'd travel for a pet?",
+      question: 'How far would you travel for a pet?',
       answers: [
         {
           text: 'Less than 5 miles',
@@ -143,30 +144,35 @@ const QuizList = props => {
     }
   ];
 
-  const StyledQuizList = styled.div`
+  const StyledQuizList = styled.section`
     max-width: 600px;
     margin: 2rem 1rem;
     padding: 2rem;
     border-radius: 0.5rem;
-    background: hsl(220, 40%, 90%);
+    background: hsl(57, 50%, 95%);
     box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.07),
       0 6.7px 5.3px rgba(0, 0, 0, 0.05), 0 12.5px 10px rgba(0, 0, 0, 0.042),
       0 22.3px 17.9px rgba(0, 0, 0, 0.035), 0 41.8px 33.4px rgba(0, 0, 0, 0.028),
       0 100px 80px rgba(0, 0, 0, 0.02);
 
+    h1 {
+      position: relative;
+      padding-bottom: 1rem;
+    }
+
+    h1:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: hsla(50, 34%, 15%, 0.2);
+    }
+
     @media (min-width: 500px) {
       margin: 2rem auto;
     }
-  `;
-
-  const Button = styled.button`
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    padding: 0.5rem 1rem;
-    border-radius: 0.2rem;
-    color: hsl(255, 32%, 35%);
-    background: hsl(255, 32%, 75%);
   `;
 
   // <a href="https://www.vecteezy.com/free-vector/id-card-background">Id Card Background Vectors by Vecteezy</a>
@@ -194,7 +200,7 @@ const QuizList = props => {
           />
         ))}
         <InputQuestion value={zipCode} handleChange={handleZipCode} />
-        <Button>Find Pets</Button>
+        <PrimaryButton>Find Pets</PrimaryButton>
       </form>
     </StyledQuizList>
   );

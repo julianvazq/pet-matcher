@@ -1,5 +1,5 @@
 import React from 'react';
-import { QuestionContainer, Label, Input } from './form-styles';
+import { QuestionContainer, Label, Input } from '../styles/styled-components';
 
 const InputQuestion = ({ value, handleChange }) => {
   return (

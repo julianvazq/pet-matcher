@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { QuestionContainer, Label } from './form-styles';
+import { QuestionContainer, Label } from '../styles/styled-components';
 
 const RadioQuestion = ({ question, answers, currentValue, handleChange }) => {
   return (
@@ -17,7 +17,7 @@ const RadioQuestion = ({ question, answers, currentValue, handleChange }) => {
                 value={answer.value}
                 onChange={handleChange}
               />
-              <span class='radio-checkmark'></span>
+              <span className='radio-checkmark'></span>
             </label>
 
             <br />

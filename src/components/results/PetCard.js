@@ -16,9 +16,9 @@ const PetCard = ({ petInfo }) => {
     return breeds;
   };
 
-  const FlexCard = styled.div`
+  const FlexCard = styled.article`
     display: flex;
-    background: hsl(220, 34%, 75%);
+    background: hsl(50, 50%, 89%);
     border-radius: 0.5rem;
     box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.07),
       0 6.7px 5.3px rgba(0, 0, 0, 0.05), 0 12.5px 10px rgba(0, 0, 0, 0.042),
@@ -44,7 +44,7 @@ const PetCard = ({ petInfo }) => {
     h2 {
       font-size: 1.125rem;
       font-weight: 600;
-      color: hsl(220, 34%, 50%);
+      color: hsl(55, 13%, 37%);
       margin-bottom: 0.5rem;
       line-height: 1.125;
     }
@@ -52,7 +52,7 @@ const PetCard = ({ petInfo }) => {
 
   const Age = styled.p`
     font-size: 1.125rem;
-    color: hsl(220.2, 70.5%, 25.3%);
+    color: hsl(50, 70.5%, 25.3%);
     margin-bottom: 0.25rem;
   `;
 
@@ -68,7 +68,7 @@ const PetCard = ({ petInfo }) => {
     right: 0;
     width: 100%;
     border-bottom-right-radius: 0.5rem;
-    background: hsl(220.8, 45%, 73%);
+    background: hsl(50, 45%, 82%);
     box-shadow: inset 0 1px 2px hsla(0, 0%, 0%, 0.1);
     line-height: 1;
 
@@ -76,7 +76,7 @@ const PetCard = ({ petInfo }) => {
       font-size: 1.5rem;
       font-weight: 600;
       padding: 0.5rem 1rem;
-      color: hsl(218.9, 19.6%, 37.1%);
+      color: hsl(50, 19.6%, 37.1%);
     }
 
     span {
@@ -108,7 +108,7 @@ const PetCard = ({ petInfo }) => {
       </ImgContainer>
       <PetInfoContainer>
         <h1>
-          {/* Lowercase + Capitalize Names */}
+          {/* Lowercase and then capitalize names */}
           {petInfo.name.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())}
         </h1>
         <h2>{getBreeds()}</h2>

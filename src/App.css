@@ -4,17 +4,13 @@
   box-sizing: border-box;
 }
 
-html {
-  box-shadow: inset 0 0 0 100vh rgba(0, 0, 0, 0.5);
-}
-
 body {
   font-family: 'Open Sans', sans-serif;
-  color: hsl(220, 50%, 20%);
+  color: hsl(50, 12%, 22%);
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url(./static/dog-pattern-1000.jpg);
   background-color: hsla(0, 0%, 0%, 0.55);
-  background-image: url(./static/dog-pattern-1000.jpg);
   background-size: 500px 500px;
-  /* box-shadow: inset 0 0 0 100vh rgba(0, 0, 0, 0.5); */
 }
 
 a {
@@ -64,18 +60,19 @@ button {
   left: 0;
   height: 20px;
   width: 20px;
+  border: 0.5px solid hsla(0, 0%, 0%, 0.1);
   border-radius: 0.2rem;
-  background-color: #eee;
+  background-color: hsl(57, 50%, 100%);
 }
 
 /* On mouse-over, add a grey background color */
 .container:hover input ~ .checkmark {
-  background-color: #ccc;
+  background-color: hsl(50, 50%, 80%);
 }
 
 /* When the checkbox is checked, add a blue background */
 .container input:checked ~ .checkmark {
-  background-color: hsl(220, 34%, 50%);
+  background-color: hsl(50, 50%, 80%);
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -96,7 +93,7 @@ button {
   top: 3px;
   width: 4px;
   height: 8px;
-  border: solid white;
+  border: solid hsl(220, 50%, 20%);
   border-width: 0 3px 3px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
@@ -131,18 +128,19 @@ button {
   left: 0;
   height: 20px;
   width: 20px;
-  background-color: #eee;
+  border: 0.5px solid hsla(0, 0%, 0%, 0.1);
+  background-color: hsl(57, 50%, 100%);
   border-radius: 50%;
 }
 
 /* On mouse-over, add a grey background color */
 .radio-container:hover input ~ .radio-checkmark {
-  background-color: #ccc;
+  background-color: hsl(50, 50%, 80%);
 }
 
 /* When the radio button is checked, add a blue background */
 .radio-container input:checked ~ .radio-checkmark {
-  background-color: hsl(220, 34%, 50%);
+  background-color: hsl(50, 50%, 80%);
 }
 
 /* Create the indicator (the dot/circle - hidden when not checked) */
@@ -164,5 +162,5 @@ button {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: white;
+  background: hsl(220, 50%, 20%);
 }
