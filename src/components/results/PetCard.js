@@ -38,13 +38,14 @@ const PetCard = ({ petInfo }) => {
     h1 {
       font-size: 1.75rem;
       line-height: 1.125;
+      padding: 0.25rem 0;
     }
 
     h2 {
       font-size: 1.125rem;
       font-weight: 600;
       color: hsl(220, 34%, 50%);
-      margin: 0.125rem 0 0.5rem 0;
+      margin-bottom: 0.5rem;
       line-height: 1.125;
     }
   `;
@@ -52,7 +53,7 @@ const PetCard = ({ petInfo }) => {
   const Age = styled.p`
     font-size: 1.125rem;
     color: hsl(220.2, 70.5%, 25.3%);
-    margin-bottom: 0.125rem;
+    margin-bottom: 0.25rem;
   `;
 
   const GenericInfo = styled.p`
@@ -99,14 +100,17 @@ const PetCard = ({ petInfo }) => {
             objectFit: 'cover',
             display: 'block',
             width: '100%',
-            height: '260px',
+            height: '250px',
             borderTopLeftRadius: '0.5rem',
             borderBottomLeftRadius: '0.5rem'
           }}
         />
       </ImgContainer>
       <PetInfoContainer>
-        <h1>{petInfo.name}</h1>
+        <h1>
+          {/* Lowercase + Capitalize Names */}
+          {petInfo.name.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())}
+        </h1>
         <h2>{getBreeds()}</h2>
         <Age>{petInfo.age}</Age>
         <GenericInfo>{petInfo.gender}</GenericInfo>

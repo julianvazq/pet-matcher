@@ -2,26 +2,35 @@ import React, { useState, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import { PetContext } from '../context/PetContext';
 import styled from 'styled-components';
-import QuizQuestion from './QuizQuestion';
+import CheckboxQuestion from './CheckboxQuestion';
+import RadioQuestion from './RadioQuestion';
 
 const QuizList = props => {
-  const { setSizes, setAges, setGenders } = useContext(PetContext);
+  const { setSizes, setAges, setGenders, setZip, setDistance } = useContext(
+    PetContext
+  );
   const [checkedSizes, setCheckedSizes] = useState(new Map());
   const [checkedAges, setCheckedAges] = useState(new Map());
   const [checkedGenders, setCheckedGenders] = useState(new Map());
+  const [zipCode, setZipCode] = useState('');
+  const [maxDistance, setMaxDistance] = useState(null);
+
+  const handleZipCode = e => {
+    setZipCode(e.target.value);
+  };
 
   const onSubmit = e => {
     e.preventDefault();
     setSizes(checkedSizes);
     setAges(checkedAges);
     setGenders(checkedGenders);
+    setZip(zipCode);
     // Redirect
     props.history.push('/results');
   };
 
-  const questions = [
+  const checkboxQuestions = [
     {
-      type: 'checkbox',
       question: 'What is your ideal dog size?',
       answers: [
         {
@@ -46,7 +55,6 @@ const QuizList = props => {
       }
     },
     {
-      type: 'checkbox',
       question: 'What ages would you consider adopting?',
       answers: [
         {
@@ -75,7 +83,6 @@ const QuizList = props => {
       }
     },
     {
-      type: 'checkbox',
       question: 'What is your preferred gender?',
       answers: [
         {
@@ -96,33 +103,59 @@ const QuizList = props => {
       }
     }
   ];
-  //     ,
-  //     {
-  //       question: 'How often would you exercise with your dog?'
-  //     },
-  //     {
-  //       question: "Would you prefer a dog that doesn't shed?"
-  //     },
-  //     {
-  //       question: 'What is your ideal dog size?'
-  //     },
-  //     {
-  //       question: 'What is your ideal dog size?'
-  //     }
-  //   ];
+
+  const radioQuestions = [
+    {
+      question: "What's distance you'd travel for a pet?",
+      answers: [
+        {
+          text: 'Less than 5 miles',
+          value: '5'
+        },
+        {
+          text: 'Less than 10 miles ',
+          value: '10'
+        },
+        {
+          text: 'Less than 25 miles ',
+          value: '25'
+        },
+        {
+          text: 'Less than 50 miles ',
+          value: '50'
+        },
+        {
+          text: 'Less than 100 miles ',
+          value: '100'
+        },
+        {
+          text: "I'd travel any distance",
+          value: ''
+        }
+      ],
+      currentValue: maxDistance,
+      handleChange: function(e) {
+        const { value } = e.target;
+        setMaxDistance(value);
+      }
+    }
+  ];
 
   const StyledQuizList = styled.div`
-    max-width: 700px;
-    margin: auto;
+    max-width: 600px;
+    margin: 2rem 1rem;
+
+    @media (min-width: 500px) {
+      margin: 2rem auto;
+    }
   `;
 
   return (
     <StyledQuizList>
       <h1>Pet Quiz</h1>
       <form onSubmit={onSubmit}>
-        {questions.map(q => (
-          <QuizQuestion
-            type={q.type}
+        {checkboxQuestions.map(q => (
+          <CheckboxQuestion
             question={q.question}
             answers={q.answers}
             handleChange={q.handleChange}
@@ -130,6 +163,19 @@ const QuizList = props => {
             key={q.question}
           />
         ))}
+        {radioQuestions.map(q => (
+          <RadioQuestion
+            question={q.question}
+            answers={q.answers}
+            currentValue={maxDistance}
+            handleChange={q.handleChange}
+            key={q.question}
+          />
+        ))}
+        <label>Zip Code</label>
+        <br />
+        <input autoFocus type='text' value={zipCode} onChange={handleZipCode} />
+        <br />
         <button>Find Pets</button>
       </form>
     </StyledQuizList>

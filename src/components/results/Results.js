@@ -4,8 +4,12 @@ import { PetContext } from '../context/PetContext';
 import PetCard from './PetCard';
 
 const Results = () => {
-  const { sizes, ages, genders, setToken } = useContext(PetContext);
+  const { sizes, ages, genders, zip, distance, setToken } = useContext(
+    PetContext
+  );
   const [pets, setPets] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     async function fetchPets() {
@@ -50,7 +54,7 @@ const Results = () => {
       setToken(TOKEN);
 
       const resPets = await fetch(
-        `https://api.petfinder.com/v2/animals?location=20850&type=dog&status=adoptable&size=${sizesArray.join(
+        `https://api.petfinder.com/v2/animals?type=dog&status=adoptable&location=${zip}&distance=${distance}&size=${sizesArray.join(
           ','
         )}&age=${agesArray.join(',')}&gender=${gendersArray.join(',')}`,
         {
@@ -59,11 +63,24 @@ const Results = () => {
           }
         }
       );
+
+      // Checks if response is ok (200)
+      if (!resPets.ok) {
+        setError(true);
+      }
+
       const pets = await resPets.json();
 
       setPets(pets.animals);
     }
-    fetchPets();
+
+    setIsLoading(true);
+    try {
+      fetchPets();
+      setIsLoading(false);
+    } catch (e) {
+      console.log('Oh no, something went wrong', e);
+    }
   }, []);
 
   const Container = styled.div`
@@ -93,13 +110,19 @@ const Results = () => {
     <Container>
       <h1>Results</h1>
       <h2>Click on a pet to learn more!</h2>
-      <Grid>
-        {pets &&
-          pets.map(
-            pet =>
-              pet.photos.length > 0 && <PetCard key={pet.id} petInfo={pet} />
-          )}
-      </Grid>
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        'Oh no, something went wrong.'
+      ) : (
+        <Grid>
+          {pets &&
+            pets.map(
+              pet =>
+                pet.photos.length > 0 && <PetCard key={pet.id} petInfo={pet} />
+            )}
+        </Grid>
+      )}
     </Container>
   );
 };
