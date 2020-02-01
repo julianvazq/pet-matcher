@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { PetContext } from '../context/PetContext';
 import PetCard from './PetCard';
 import Alert from './Alert';
+import Loading from './Loading';
 
 const Results = () => {
   const { sizes, ages, genders, zip, distance, setToken } = useContext(
@@ -159,7 +160,7 @@ const Results = () => {
       <Title>Results</Title>
       <Subtitle>Click on a pet to learn more!</Subtitle>
       {isLoading ? (
-        <p>Loading...</p>
+        <Loading />
       ) : error ? (
         <Alert
           message='Oh no, something went wrong.'

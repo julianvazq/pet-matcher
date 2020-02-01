@@ -18,6 +18,7 @@ const PetCard = ({ petInfo }) => {
 
   const FlexCard = styled.article`
     display: flex;
+    max-height: 250px;
     background: hsl(50, 50%, 89%);
     border-radius: 0.5rem;
     box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.07),

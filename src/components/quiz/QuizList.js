@@ -199,7 +199,11 @@ const QuizList = props => {
             key={q.question}
           />
         ))}
-        <InputQuestion value={zipCode} handleChange={handleZipCode} />
+        <InputQuestion
+          label='Zip Code'
+          value={zipCode}
+          handleChange={handleZipCode}
+        />
         <PrimaryButton>Find Pets</PrimaryButton>
       </form>
     </StyledQuizList>
