@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const QuizQuestion = ({ question, answers, handleChange, items }) => {
   const QuestionContainer = styled.div`
     margin: 1rem 0;
-    padding: 0.5rem;
+    padding: 1.5rem;
     background: hsl(220, 34%, 75%);
     border-radius: 0.5rem;
   `;
@@ -13,7 +13,8 @@ const QuizQuestion = ({ question, answers, handleChange, items }) => {
     display: block;
     position: relative;
     font-size: 1.25rem;
-    margin-bottom: 0.125rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
   `;
 
   /* Custom checkbox */
@@ -52,13 +53,18 @@ const QuizQuestion = ({ question, answers, handleChange, items }) => {
       {answers.map(answer => {
         return (
           <Fragment key={answer.text}>
-            <Input
-              type='checkbox'
-              checked={items.get(answer.value)}
-              value={answer.value}
-              onChange={handleChange}
-            />
-            <Answer>{answer.text}</Answer>
+            <label className='container'>
+              {' '}
+              {answer.text}
+              <input
+                type='checkbox'
+                checked={items.get(answer.value)}
+                value={answer.value}
+                onChange={handleChange}
+              />
+              <span className='checkmark'></span>
+            </label>
+
             <br />
           </Fragment>
         );

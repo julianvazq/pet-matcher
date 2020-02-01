@@ -174,7 +174,7 @@ const QuizList = props => {
         ))}
         <label>Zip Code</label>
         <br />
-        <input autoFocus type='text' value={zipCode} onChange={handleZipCode} />
+        <input type='text' value={zipCode} onChange={handleZipCode} />
         <br />
         <button>Find Pets</button>
       </form>
