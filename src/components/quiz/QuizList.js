@@ -4,6 +4,7 @@ import { PetContext } from '../context/PetContext';
 import styled from 'styled-components';
 import CheckboxQuestion from './CheckboxQuestion';
 import RadioQuestion from './RadioQuestion';
+import InputQuestion from './InputQuestion';
 
 const QuizList = props => {
   const { setSizes, setAges, setGenders, setZip, setDistance } = useContext(
@@ -25,6 +26,7 @@ const QuizList = props => {
     setAges(checkedAges);
     setGenders(checkedGenders);
     setZip(zipCode);
+    setDistance(maxDistance);
     // Redirect
     props.history.push('/results');
   };
@@ -150,9 +152,19 @@ const QuizList = props => {
     }
   `;
 
+  const Button = styled.button`
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    padding: 0.5rem 1rem;
+    border-radius: 0.2rem;
+    color: hsl(255, 32%, 35%);
+    background: hsl(255, 32%, 75%);
+  `;
+
   return (
     <StyledQuizList>
-      <h1>Pet Quiz</h1>
+      <h1>Pet Matcher</h1>
       <form onSubmit={onSubmit}>
         {checkboxQuestions.map(q => (
           <CheckboxQuestion
@@ -172,11 +184,8 @@ const QuizList = props => {
             key={q.question}
           />
         ))}
-        <label>Zip Code</label>
-        <br />
-        <input type='text' value={zipCode} onChange={handleZipCode} />
-        <br />
-        <button>Find Pets</button>
+        <InputQuestion value={zipCode} handleChange={handleZipCode} />
+        <Button>Find Pets</Button>
       </form>
     </StyledQuizList>
   );
