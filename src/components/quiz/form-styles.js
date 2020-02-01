@@ -14,3 +14,12 @@ export const Label = styled.label`
   font-weight: 600;
   margin-bottom: 1rem;
 `;
+
+export const Input = styled.input`
+  height: 30px;
+  width: 150px;
+  border-radius: 0.2rem;
+  border: none;
+  padding: 0 0.5rem;
+  font-size: 1.25rem;
+`;

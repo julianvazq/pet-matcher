@@ -7,7 +7,7 @@
 body {
   font-family: 'Open Sans', sans-serif;
   color: hsl(220, 50%, 20%);
-  background: #fdfdfd;
+  background: hsl(220, 50%, 90%);
 }
 
 a {

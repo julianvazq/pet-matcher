@@ -1,15 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
-import { QuestionContainer, Label } from './form-styles';
+import { QuestionContainer, Label, Input } from './form-styles';
 
 const InputQuestion = ({ value, handleChange }) => {
-  const Input = styled.input`
-    height: 30px;
-    width: 150px;
-    border-radius: 0.2rem;
-    border: none;
-  `;
-
   return (
     <QuestionContainer>
       <Label>Zip Code</Label>
