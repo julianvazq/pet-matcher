@@ -1,15 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { QuestionContainer, Label, Input } from '../styles/styled-components';
 
 const InputQuestion = ({ label, value, handleChange }) => {
-  const inputRef = useRef(null);
-
-  useEffect(() => {
-    if (value && value.length !== 5) {
-      inputRef.current.focus();
-    }
-  }, [value]);
-
   return (
     <QuestionContainer>
       <Label>{label}</Label>
@@ -17,9 +9,8 @@ const InputQuestion = ({ label, value, handleChange }) => {
         type='text'
         value={value}
         onChange={handleChange}
-        // autofocus='true'
-        ref={inputRef}
-        // ref={input => input && value && input.focus()}
+        // autoFocus={false}
+        ref={input => input && value && input.focus()}
       />
     </QuestionContainer>
   );

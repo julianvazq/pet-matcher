@@ -8,7 +8,6 @@ const PetContextProvider = props => {
   const [genders, setGenders] = useState(null);
   const [zip, setZip] = useState(20850);
   const [distance, setDistance] = useState(25);
-  const [token, setToken] = useState(null);
 
   return (
     <PetContext.Provider
@@ -18,13 +17,11 @@ const PetContextProvider = props => {
         genders,
         zip,
         distance,
-        token,
         setSizes,
         setAges,
         setGenders,
         setZip,
-        setDistance,
-        setToken
+        setDistance
       }}
     >
       {props.children}

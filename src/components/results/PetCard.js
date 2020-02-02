@@ -91,39 +91,39 @@ const PetCard = ({ petInfo }) => {
   console.log(petInfo);
 
   return (
-    // <Link to={`/results/${petInfo.id}`}>
-    <FlexCard>
-      <ImgContainer>
-        <img
-          src={getImg()}
-          alt={petInfo.type}
-          style={{
-            objectFit: 'cover',
-            display: 'block',
-            width: '100%',
-            height: '250px',
-            borderTopLeftRadius: '0.5rem',
-            borderBottomLeftRadius: '0.5rem'
-          }}
-        />
-      </ImgContainer>
-      <PetInfoContainer>
-        <h1>
-          {/* Lowercase and then capitalize names */}
-          {petInfo.name.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())}
-        </h1>
-        <h2>{getBreeds()}</h2>
-        <Age>{petInfo.age}</Age>
-        <GenericInfo>{petInfo.gender}</GenericInfo>
-        <GenericInfo>{petInfo.size}</GenericInfo>
-        <Miles>
-          <p>
-            {petInfo.distance.toFixed(2)} <span>miles</span>
-          </p>
-        </Miles>
-      </PetInfoContainer>
-    </FlexCard>
-    // </Link>
+    <Link to={`/results/${petInfo.id}`}>
+      <FlexCard>
+        <ImgContainer>
+          <img
+            src={getImg()}
+            alt={petInfo.type}
+            style={{
+              objectFit: 'cover',
+              display: 'block',
+              width: '100%',
+              height: '250px',
+              borderTopLeftRadius: '0.5rem',
+              borderBottomLeftRadius: '0.5rem'
+            }}
+          />
+        </ImgContainer>
+        <PetInfoContainer>
+          <h1>
+            {/* Lowercase and then capitalize names */}
+            {petInfo.name.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())}
+          </h1>
+          <h2>{getBreeds()}</h2>
+          <Age>{petInfo.age}</Age>
+          <GenericInfo>{petInfo.gender}</GenericInfo>
+          <GenericInfo>{petInfo.size}</GenericInfo>
+          <Miles>
+            <p>
+              {petInfo.distance.toFixed(2)} <span>miles</span>
+            </p>
+          </Miles>
+        </PetInfoContainer>
+      </FlexCard>
+    </Link>
   );
 };
 
