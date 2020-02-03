@@ -41,7 +41,6 @@ button {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  color: hsl(220.2, 70.5%, 25.3%);
 }
 
 /* Hide the browser's default checkbox */

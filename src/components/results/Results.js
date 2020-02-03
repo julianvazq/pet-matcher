@@ -82,6 +82,14 @@ const Results = () => {
     }
   }, []);
 
+  const HeadingContainer = styled.div`
+    margin: 0 1rem;
+
+    @media (min-width: 600px) {
+      margin: 0;
+    }
+  `;
+
   const Title = styled.h1`
     font-size: 2rem;
     margin-bottom: 0.5rem;
@@ -113,7 +121,7 @@ const Results = () => {
     @media (min-width: 700px) {
       grid-template-columns: 1fr 1fr;
     }
-    @media (min-width: 900px) {
+    @media (min-width: 1100px) {
       grid-template-columns: 1fr 1fr 1fr;
     }
   `;
@@ -135,8 +143,10 @@ const Results = () => {
 
   return (
     <PageContainer>
-      <Title>Results</Title>
-      <Subtitle>Click on a pet to learn more!</Subtitle>
+      <HeadingContainer>
+        <Title>Results</Title>
+        <Subtitle>Click on a pet to learn more!</Subtitle>
+      </HeadingContainer>
       {isLoading ? (
         <Loading />
       ) : error ? (

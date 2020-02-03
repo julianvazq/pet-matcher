@@ -1,7 +1,17 @@
 import React, { Fragment } from 'react';
-import { QuestionContainer, Label } from '../styles/styled-components';
+import {
+  QuestionContainer,
+  Label,
+  Validation
+} from '../styles/styled-components';
 
-const RadioQuestion = ({ question, answers, currentValue, handleChange }) => {
+const RadioQuestion = ({
+  question,
+  answers,
+  currentValue,
+  validation,
+  handleChange
+}) => {
   return (
     <QuestionContainer>
       <Label>{question}</Label>
@@ -24,6 +34,9 @@ const RadioQuestion = ({ question, answers, currentValue, handleChange }) => {
           </Fragment>
         );
       })}
+      {!validation && (
+        <Validation>Please select at least one answer.</Validation>
+      )}
     </QuestionContainer>
   );
 };

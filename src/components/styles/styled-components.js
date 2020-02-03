@@ -93,11 +93,20 @@ export const PrimaryButton = styled.button`
   padding: 0.5rem 1rem;
   border-radius: 0.2rem;
   color: inherit;
+  cursor: pointer;
   background: hsl(0, 0%, 79%);
   box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.07);
   display: inline-block;
+
+  &:hover {
+    opacity: 0.9;
+  }
 `;
 
 export const SecondaryButton = styled(PrimaryButton)`
   font-size: 1.25rem;
+`;
+
+export const Validation = styled.p`
+  color: #cc0000;
 `;

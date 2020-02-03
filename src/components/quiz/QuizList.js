@@ -16,9 +16,61 @@ const QuizList = props => {
   const [checkedGenders, setCheckedGenders] = useState(new Map());
   const [zipCode, setZipCode] = useState('');
   const [maxDistance, setMaxDistance] = useState(null);
+  const [validation, setValidation] = useState(
+    new Map([
+      ['sizes', true],
+      ['ages', true],
+      ['genders', true],
+      ['zip', true],
+      ['distance', true]
+    ])
+  );
 
-  const handleZipCode = e => {
-    setZipCode(e.target.value);
+  const performValidation = () => {
+    validateMap(checkedSizes)
+      ? validation.set('sizes', true)
+      : validation.set('sizes', false);
+
+    validateMap(checkedAges)
+      ? validation.set('ages', true)
+      : validation.set('ages', false);
+
+    validateMap(checkedGenders)
+      ? validation.set('genders', true)
+      : validation.set('genders', false);
+
+    maxDistance
+      ? validation.set('distance', true)
+      : validation.set('distance', false);
+
+    validateZip() ? validation.set('zip', true) : validation.set('zip', false);
+
+    let readyToSubmit = true;
+    validation.forEach((value, key) => {
+      if (!value) {
+        readyToSubmit = false;
+      }
+    });
+
+    return readyToSubmit;
+  };
+
+  const validateMap = map => {
+    let foundInput = false;
+    map.forEach((value, key) => {
+      if (value) {
+        foundInput = true;
+      }
+    });
+    return foundInput;
+  };
+
+  const validateZip = () => {
+    let validZip = false;
+    if (zipCode && zipCode.length === 5) {
+      validZip = true;
+    }
+    return validZip;
   };
 
   const onSubmit = e => {
@@ -28,13 +80,14 @@ const QuizList = props => {
     setGenders(checkedGenders);
     setZip(zipCode);
     setDistance(maxDistance);
-    // Redirect
-    props.history.push('/results');
+
+    // Validate and Redirect
+    performValidation() && props.history.push('/results');
   };
 
   const checkboxQuestions = [
     {
-      question: 'What is your ideal dog size?',
+      question: 'Select your ideal dog size(s)',
       answers: [
         {
           text: 'Small',
@@ -50,6 +103,7 @@ const QuizList = props => {
         }
       ],
       items: checkedSizes,
+      validation: validation.get('sizes'),
       handleChange: function(e) {
         const { checked, value } = e.target;
         const newCheckedSizes = new Map(checkedSizes);
@@ -78,6 +132,7 @@ const QuizList = props => {
         }
       ],
       items: checkedAges,
+      validation: validation.get('ages'),
       handleChange: function(e) {
         const { checked, value } = e.target;
         const newCheckedAges = new Map(checkedAges);
@@ -86,7 +141,7 @@ const QuizList = props => {
       }
     },
     {
-      question: 'What is your preferred gender?',
+      question: 'Select your preferred gender(s)',
       answers: [
         {
           text: 'Male',
@@ -98,6 +153,7 @@ const QuizList = props => {
         }
       ],
       items: checkedGenders,
+      validation: validation.get('genders'),
       handleChange: function(e) {
         const { checked, value } = e.target;
         const newCheckedGenders = new Map(checkedGenders);
@@ -133,13 +189,27 @@ const QuizList = props => {
         },
         {
           text: "I'd travel any distance",
-          value: ''
+          value: '500'
         }
       ],
       currentValue: maxDistance,
+      validation: validation.get('distance'),
       handleChange: function(e) {
         const { value } = e.target;
         setMaxDistance(value);
+      }
+    }
+  ];
+
+  const textInputQuestions = [
+    {
+      question: 'Zip Code',
+      value: zipCode,
+      validation: validation.get('zip'),
+      validationMessage: 'Please enter a 5-digit US zip code.',
+      handleChange: function(e) {
+        const { value } = e.target;
+        setZipCode(value);
       }
     }
   ];
@@ -188,6 +258,7 @@ const QuizList = props => {
             handleChange={q.handleChange}
             items={q.items}
             key={q.question}
+            validation={q.validation}
           />
         ))}
         {radioQuestions.map(q => (
@@ -197,13 +268,20 @@ const QuizList = props => {
             currentValue={maxDistance}
             handleChange={q.handleChange}
             key={q.question}
+            validation={q.validation}
           />
         ))}
-        <InputQuestion
-          label='Zip Code'
-          value={zipCode}
-          handleChange={handleZipCode}
-        />
+        {textInputQuestions.map(q => (
+          <InputQuestion
+            question={q.question}
+            value={q.value}
+            handleChange={q.handleChange}
+            key={q.question}
+            validation={q.validation}
+            s
+            validationMessage={q.validationMessage}
+          />
+        ))}
         <PrimaryButton>Find Pets</PrimaryButton>
       </form>
     </StyledQuizList>

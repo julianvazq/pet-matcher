@@ -1,7 +1,17 @@
 import React, { Fragment } from 'react';
-import { QuestionContainer, Label } from '../styles/styled-components';
+import {
+  QuestionContainer,
+  Label,
+  Validation
+} from '../styles/styled-components';
 
-const QuizQuestion = ({ question, answers, handleChange, items }) => {
+const QuizQuestion = ({
+  question,
+  answers,
+  validation,
+  handleChange,
+  items
+}) => {
   return (
     <QuestionContainer>
       <Label>{question}</Label>
@@ -24,6 +34,9 @@ const QuizQuestion = ({ question, answers, handleChange, items }) => {
           </Fragment>
         );
       })}
+      {!validation && (
+        <Validation>Please select at least one answer.</Validation>
+      )}
     </QuestionContainer>
   );
 };

@@ -35,6 +35,7 @@ const PetCard = ({ petInfo }) => {
     flex: 1 1 0;
     padding: 0.125rem 1rem;
     position: relative;
+    overflow: hidden;
 
     h1 {
       font-size: 1.75rem;
@@ -58,7 +59,6 @@ const PetCard = ({ petInfo }) => {
   `;
 
   const GenericInfo = styled.p`
-    color: hsl(220.8, 21.7%, 22.5%);
     margin-bottom: 0.125rem;
   `;
 
