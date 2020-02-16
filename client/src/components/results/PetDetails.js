@@ -5,7 +5,7 @@ import { PageContainer, PrimaryButton } from '../styles/styled-components';
 import Alert from './Alert';
 import Loading from './Loading';
 
-const PetDetails = ({ match, history }) => {
+const PetDetails = ({ match, history, petInfo }) => {
   const [pet, setPet] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -20,35 +20,16 @@ const PetDetails = ({ match, history }) => {
 
   useEffect(() => {
     const fetchPet = async () => {
-      const resToken = await fetch(
-        'https://api.petfinder.com/v2/oauth2/token',
-        {
-          body: `grant_type=client_credentials&client_id=${process.env.REACT_APP_API_KEY}&client_secret=${process.env.REACT_APP_SECRET}`,
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          method: 'POST'
-        }
-      );
-      const dataToken = await resToken.json();
-      const TOKEN = dataToken.access_token;
+      const resPet = await fetch(`/${match.params.id}`);
 
-      const resPet = await fetch(
-        `https://api.petfinder.com/v2/animals/${match.params.id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${TOKEN}`
-          }
-        }
-      );
-
-      // Checks if response is ok (200)
+      // // Checks if response is ok (200)
       if (!resPet.ok) {
         setError(true);
       }
 
       const pet = await resPet.json();
       setPet(pet.animal);
+
       setIsLoading(false);
     };
     setIsLoading(true);
@@ -62,6 +43,7 @@ const PetDetails = ({ match, history }) => {
   const PetDetailsContainer = styled(PageContainer)`
     min-height: initial;
     max-width: 1000px;
+    padding: 1rem;
 
     @media (min-width: 800px) {
       padding: 2rem 1rem;
@@ -228,7 +210,7 @@ const PetDetails = ({ match, history }) => {
     margin: 1.5rem 0;
   `;
 
-  console.log(pet);
+  // console.log(pet);
   const displayPet = pet && (
     <FlexContainer>
       <ImgContainer>

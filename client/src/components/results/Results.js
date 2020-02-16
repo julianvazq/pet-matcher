@@ -17,11 +17,13 @@ const Results = () => {
       const sizesArray = [];
       const agesArray = [];
       const gendersArray = [];
+      let data = { zip: zip, distance: distance };
 
       if (sizes) {
         sizes.forEach((key, value) => {
           if (key) {
             sizesArray.push(value);
+            data = { ...data, sizesArray: sizesArray };
           }
         });
       }
@@ -29,6 +31,7 @@ const Results = () => {
         ages.forEach((key, value) => {
           if (key) {
             agesArray.push(value);
+            data = { ...data, agesArray: agesArray };
           }
         });
       }
@@ -36,33 +39,19 @@ const Results = () => {
         genders.forEach((key, value) => {
           if (key) {
             gendersArray.push(value);
+            data = { ...data, gendersArray: gendersArray };
           }
         });
       }
 
-      const resToken = await fetch(
-        'https://api.petfinder.com/v2/oauth2/token',
-        {
-          body: `grant_type=client_credentials&client_id=${process.env.REACT_APP_API_KEY}&client_secret=${process.env.REACT_APP_SECRET}`,
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          method: 'POST'
-        }
-      );
-      const dataToken = await resToken.json();
-      const TOKEN = dataToken.access_token;
-
-      const resPets = await fetch(
-        `https://api.petfinder.com/v2/animals?type=dog&status=adoptable&location=${zip}&distance=${distance}&size=${sizesArray.join(
-          ','
-        )}&age=${agesArray.join(',')}&gender=${gendersArray.join(',')}`,
-        {
-          headers: {
-            Authorization: `Bearer ${TOKEN}`
-          }
-        }
-      );
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      };
+      const resPets = await fetch('/pets', options);
 
       // Checks if response is ok (200)
       if (!resPets.ok) {
@@ -70,7 +59,8 @@ const Results = () => {
       }
 
       const pets = await resPets.json();
-      setPets(pets.animals);
+
+      setPets(pets);
       setIsLoading(false);
     }
 
