@@ -8,8 +8,6 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// console.log(process.env.SECRET);
-
 app.post('/pets', async (req, res) => {
   try {
     const { sizesArray, agesArray, gendersArray, zip, distance } = req.body;
@@ -42,8 +40,6 @@ app.post('/pets', async (req, res) => {
 });
 
 app.get('/:id', async (req, res) => {
-  console.log(req.params.id);
-
   const resToken = await fetch('https://api.petfinder.com/v2/oauth2/token', {
     body: `grant_type=client_credentials&client_id=${process.env.API_KEY}&client_secret=${process.env.SECRET}`,
     headers: {

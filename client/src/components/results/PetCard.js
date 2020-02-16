@@ -88,8 +88,6 @@ const PetCard = ({ petInfo }) => {
     }
   `;
 
-  console.log(petInfo);
-
   return (
     <Link to={`/results/${petInfo.id}`}>
       <FlexCard>
