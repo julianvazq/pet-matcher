@@ -13,9 +13,9 @@ app.use(express.static(`${__dirname}/client/build`));
 app.post('/pets', async (req, res) => {
   try {
     const {
-      sizesArray,
-      agesArray,
-      gendersArray,
+      sizesArray = ['small', 'medium', 'large'],
+      agesArray = ['baby', 'young', 'adult', 'senior'],
+      gendersArray = ['male', 'female'],
       zip = 20850,
       distance = 50
     } = req.body;
