@@ -12,7 +12,13 @@ app.use(express.static(`${__dirname}/client/build`));
 
 app.post('/pets', async (req, res) => {
   try {
-    const { sizesArray, agesArray, gendersArray, zip, distance } = req.body;
+    const {
+      sizesArray,
+      agesArray,
+      gendersArray,
+      zip = 20850,
+      distance = 50
+    } = req.body;
     const resToken = await fetch('https://api.petfinder.com/v2/oauth2/token', {
       body: `grant_type=client_credentials&client_id=${process.env.API_KEY}&client_secret=${process.env.SECRET}`,
       headers: {
