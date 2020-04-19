@@ -52,6 +52,7 @@ const PetCard = ({ petInfo }) => {
 
   const ImgContainer = styled.div`
     flex: 0 1 200px;
+    background: rgba(0, 0, 0, 0);
     position: relative;
   `;
 
@@ -127,19 +128,7 @@ const PetCard = ({ petInfo }) => {
     <Link to={`/results/${petInfo.id}`}>
       <FlexCard>
         <ImgContainer>
-          <ImageSlider photos={petInfo.photos} />
-          {/* <img
-            src={getImg()}
-            alt={petInfo.type}
-            style={{
-              objectFit: 'cover',
-              display: 'block',
-              width: '100%',
-              height: '250px',
-              borderTopLeftRadius: '0.5rem',
-              borderTopRightRadius: '0.5rem'
-            }}
-          /> */}
+          <ImageSlider photos={petInfo.photos} type='card' />
         </ImgContainer>
         <PetInfoContainer>
           <h1>{formatName(petInfo.name)}</h1>

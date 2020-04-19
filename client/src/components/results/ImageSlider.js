@@ -5,7 +5,7 @@ import {
   IoIosArrowDroprightCircle
 } from 'react-icons/io';
 
-const ImageSlider = ({ photos }) => {
+const ImageSlider = ({ photos, type }) => {
   const [currentPhoto, setCurrentPhoto] = useState(0);
 
   const nextPhoto = e => {
@@ -32,11 +32,19 @@ const ImageSlider = ({ photos }) => {
 
   const Image = styled.img`
     object-fit: cover;
+    object-position: ${type === 'details' && 'center'};
+    border-radius: ${type === 'details' && '0.5rem'};
     display: block;
     width: 100%;
-    height: 250px;
+    height: ${type === 'details' ? '400px' : '275px'};
     border-top-left-radius: 0.5rem;
     border-top-right-radius: 0.5rem;
+
+    @media (min-width: 800px) {
+      height: ${type === 'details' && 'auto'};
+      object-fit: ${type === 'details' && 'initial'};
+      max-width: ${type === 'details' && '370px'};
+    }
   `;
 
   const PreviousArrow = styled(IoIosArrowDropleftCircle)`
@@ -45,8 +53,7 @@ const ImageSlider = ({ photos }) => {
     font-size: 4.5rem;
     padding: 0.5rem;
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 0%;
     left: 0%;
   `;
 
@@ -56,8 +63,7 @@ const ImageSlider = ({ photos }) => {
     font-size: 4.5rem;
     padding: 0.5rem;
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 0%;
     right: 0%;
   `;
 

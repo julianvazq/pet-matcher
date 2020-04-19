@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { PageContainer, PrimaryButton } from '../styles/styled-components';
 import Alert from './Alert';
 import Loading from './Loading';
+import ImageSlider from './ImageSlider';
 
 const PetDetails = ({ match, history, petInfo }) => {
   const [pet, setPet] = useState(null);
@@ -67,25 +68,27 @@ const PetDetails = ({ match, history, petInfo }) => {
     display: flex;
     flex-direction: column;
     justify-items: center;
+    height: fit-content;
+    position: relative;
 
     @media (min-width: 800px) {
       max-width: 500px;
     }
   `;
 
-  const PetImage = styled.img`
-    object-fit: cover;
-    object-position: center;
-    display: block;
-    border-radius: 0.5rem;
-    height: 400px;
+  // const PetImage = styled.img`
+  //   object-fit: cover;
+  //   object-position: center;
+  //   display: block;
+  //   border-radius: 0.5rem;
+  //   height: 400px;
 
-    @media (min-width: 800px) {
-      height: auto;
-      object-fit: initial;
-      max-width: 370px;
-    }
-  `;
+  //   @media (min-width: 800px) {
+  //     height: auto;
+  //     object-fit: initial;
+  //     max-width: 370px;
+  //   }
+  // `;
 
   const AdoptButton = styled(PrimaryButton)`
     margin-top: 1rem;
@@ -210,11 +213,10 @@ const PetDetails = ({ match, history, petInfo }) => {
     margin: 1.5rem 0;
   `;
 
-  // console.log(pet);
   const displayPet = pet && (
     <FlexContainer>
       <ImgContainer>
-        <PetImage src={pet?.photos[0]?.full} alt={pet.name} />
+        <ImageSlider photos={pet.photos} type='details' />
         <AdoptButton as='a' href={pet.url} target='_blank'>
           Adopt Me
         </AdoptButton>
