@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const ImageSlider = ({ photos }) => {
-  const [currentSrc, setCurrentSrc] = useState(photos[0].medium);
+  const [currentImage, setCurrentImage] = useState(0);
 
   const Image = styled.img`
     object-fit: cover;
@@ -13,7 +13,12 @@ const ImageSlider = ({ photos }) => {
     border-top-right-radius: 0.5rem;
   `;
 
-  return <Image src={currentSrc} />;
+  return (
+    <picture>
+      <source srcSet={photos[currentImage].large} media='(min-width: 1100px)' />
+      <Image src={photos[currentImage].medium} alt='Dog Image.' />
+    </picture>
+  );
 };
 
 export default ImageSlider;
