@@ -52,6 +52,7 @@ const PetCard = ({ petInfo }) => {
 
   const ImgContainer = styled.div`
     flex: 0 1 200px;
+    position: relative;
   `;
 
   const PetInfoContainer = styled.div`
