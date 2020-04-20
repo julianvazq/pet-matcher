@@ -50,7 +50,7 @@ const ImageSlider = ({ photos, type }) => {
   const PreviousArrow = styled(IoIosArrowDropleftCircle)`
     cursor: pointer;
     color: hsla(50, 50%, 89%, 0.7);
-    font-size: 4.5rem;
+    font-size: 4rem;
     padding: 0.5rem;
     position: absolute;
     top: 0%;
@@ -60,7 +60,7 @@ const ImageSlider = ({ photos, type }) => {
   const NextArrow = styled(IoIosArrowDroprightCircle)`
     cursor: pointer;
     color: hsla(50, 50%, 89%, 0.7);
-    font-size: 4.5rem;
+    font-size: 4rem;
     padding: 0.5rem;
     position: absolute;
     top: 0%;

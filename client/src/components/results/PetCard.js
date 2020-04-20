@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import ImageSlider from './ImageSlider';
+import { IoMdFemale, IoMdMale } from 'react-icons/io';
 
 const PetCard = ({ petInfo }) => {
   const getImg = () => {
@@ -81,8 +82,8 @@ const PetCard = ({ petInfo }) => {
     color: hsl(55, 15%, 43%);
 
     h2 {
-      font-size: 1.25rem;
-      text-transform: uppercase;
+      font-size: 1.125rem;
+      /* text-transform: uppercase; */
       letter-spacing: 1px;
       font-weight: 400;
     }
@@ -143,7 +144,14 @@ const PetCard = ({ petInfo }) => {
           </ListItem>
           <ListItem gender={petInfo.gender}>
             <h2>Gender</h2>
-            <p>{petInfo.gender}</p>
+            <p>
+              {petInfo.gender}{' '}
+              {petInfo.gender === 'Male' ? (
+                <IoMdMale style={{ transform: 'translateY(2px)' }} />
+              ) : (
+                <IoMdFemale style={{ verticalAlign: 'middle' }} />
+              )}
+            </p>
           </ListItem>
         </PetInfoContainer>
         <Miles>
