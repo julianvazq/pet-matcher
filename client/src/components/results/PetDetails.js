@@ -76,20 +76,6 @@ const PetDetails = ({ match, history, petInfo }) => {
     }
   `;
 
-  // const PetImage = styled.img`
-  //   object-fit: cover;
-  //   object-position: center;
-  //   display: block;
-  //   border-radius: 0.5rem;
-  //   height: 400px;
-
-  //   @media (min-width: 800px) {
-  //     height: auto;
-  //     object-fit: initial;
-  //     max-width: 370px;
-  //   }
-  // `;
-
   const AdoptButton = styled(PrimaryButton)`
     margin-top: 1rem;
     text-align: center;
@@ -196,8 +182,6 @@ const PetDetails = ({ match, history, petInfo }) => {
 
     h2 {
       font-size: 1rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
       font-weight: 400;
     }
 

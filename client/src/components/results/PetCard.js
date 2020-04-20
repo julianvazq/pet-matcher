@@ -83,8 +83,6 @@ const PetCard = ({ petInfo }) => {
 
     h2 {
       font-size: 1.125rem;
-      /* text-transform: uppercase; */
-      letter-spacing: 1px;
       font-weight: 400;
     }
 
@@ -145,12 +143,12 @@ const PetCard = ({ petInfo }) => {
           <ListItem gender={petInfo.gender}>
             <h2>Gender</h2>
             <p>
-              {petInfo.gender}{' '}
               {petInfo.gender === 'Male' ? (
                 <IoMdMale style={{ transform: 'translateY(2px)' }} />
               ) : (
                 <IoMdFemale style={{ verticalAlign: 'middle' }} />
-              )}
+              )}{' '}
+              {petInfo.gender}
             </p>
           </ListItem>
         </PetInfoContainer>
