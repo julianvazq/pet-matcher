@@ -17,7 +17,6 @@ const SearchContainer = ({ setParams }) => {
     sizeOptions[0],
     sizeOptions[1],
     sizeOptions[2],
-    sizeOptions[3],
   ]);
   const [selectedAges, setSelectedAges] = useState([
     ageOptions[0],
@@ -50,11 +49,10 @@ const SearchContainer = ({ setParams }) => {
   };
 
   const handleZipCode = (e) => {
-    // TODO: WHEN > 5, ALLOW DELETE BUT NOT ADD
-    if (zipCode.length > 5) {
+    if (zipCode.length < 5) {
       setZipCode(e.target.value);
     } else {
-      setZipCode(e.target.value);
+      setZipCode(e.target.value.slice(0, 5));
     }
     console.log('Zip Code: ', zipCode);
   };
@@ -66,6 +64,7 @@ const SearchContainer = ({ setParams }) => {
       sizes: selectedSizes,
       ages: selectedAges,
       distance: selectedDistance,
+      zipCode: zipCode,
     });
   };
 
@@ -96,6 +95,7 @@ const SearchContainer = ({ setParams }) => {
       />
       <Input
         type='number'
+        maxLength='5'
         placeholder='Enter zip code...'
         value={zipCode}
         onChange={handleZipCode}
