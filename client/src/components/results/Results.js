@@ -2,10 +2,10 @@ import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 // import { PageContainer } from '../styles/styled-components';
 import { PetContext } from '../context/PetContext';
-import PetCard from './PetCard';
 import Alert from './Alert';
 import Loading from './Loading';
 import SearchContainer from './SearchContainer';
+import PetCard from './PetCard';
 
 const Results = ({ params }) => {
   const { sizes, ages, genders, zip, distance } = useContext(PetContext);

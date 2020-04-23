@@ -2,15 +2,14 @@ import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import {
   IoIosArrowDropleftCircle,
-  IoIosArrowDroprightCircle
+  IoIosArrowDroprightCircle,
 } from 'react-icons/io';
 
 const ImageSlider = ({ photos, type }) => {
   const [currentPhoto, setCurrentPhoto] = useState(0);
 
-  const nextPhoto = e => {
-    // Stop default link behavior
-    e.preventDefault();
+  const nextPhoto = (e) => {
+    e.stopPropagation();
 
     if (photos[currentPhoto + 1]) {
       setCurrentPhoto(currentPhoto + 1);
@@ -19,10 +18,8 @@ const ImageSlider = ({ photos, type }) => {
     }
   };
 
-  const previousPhoto = e => {
-    // Stop default link behavior
-    e.preventDefault();
-
+  const previousPhoto = (e) => {
+    e.stopPropagation();
     if (photos[currentPhoto - 1]) {
       setCurrentPhoto(currentPhoto - 1);
     } else {
@@ -57,6 +54,12 @@ const ImageSlider = ({ photos, type }) => {
     }
   `;
 
+  const ImgContainer = styled.div`
+    flex: 0 1 200px;
+    background: rgba(0, 0, 0, 0);
+    position: relative;
+  `;
+
   const PreviousArrow = styled(IoIosArrowDropleftCircle)`
     cursor: pointer;
     color: hsla(50, 50%, 89%, 0.7);
@@ -78,7 +81,7 @@ const ImageSlider = ({ photos, type }) => {
   `;
 
   return (
-    <>
+    <ImgContainer>
       {photos[1] && (
         <>
           <PreviousArrow onClick={previousPhoto}>{'<'}</PreviousArrow>
@@ -92,7 +95,7 @@ const ImageSlider = ({ photos, type }) => {
         />
         <Image src={photos[currentPhoto].medium} alt='Dog Image.' />
       </picture>
-    </>
+    </ImgContainer>
   );
 };
 
