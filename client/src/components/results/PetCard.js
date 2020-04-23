@@ -1,13 +1,14 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import ImageSlider from './ImageSlider';
 import { IoMdFemale, IoMdMale } from 'react-icons/io';
+import AdditionalInformation from './AdditionalInformation';
 
 const PetCard = ({ petInfo }) => {
-  const getImg = () => {
-    const img = petInfo?.photos[0]?.medium;
-    return img;
+  const [visibility, setVisibility] = useState(false);
+
+  const changeVisibility = () => {
+    setVisibility(!visibility);
   };
 
   const getBreeds = () => {
@@ -41,6 +42,7 @@ const PetCard = ({ petInfo }) => {
   const FlexCard = styled.article`
     display: flex;
     flex-direction: column;
+    overflow: hidden;
     background: hsl(50, 50%, 89%);
     border-radius: 0.5rem;
     box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.07),
@@ -122,41 +124,40 @@ const PetCard = ({ petInfo }) => {
   `;
 
   return (
-    <Link to={`/results/${petInfo.id}`}>
-      <FlexCard>
-        <ImgContainer>
-          <ImageSlider photos={petInfo.photos} type='card' />
-        </ImgContainer>
-        <PetInfoContainer>
-          <h1>{formatName(petInfo.name)}</h1>
-          <Breed>{getBreeds()}</Breed>
-          <ListItem>
-            <h2>Age</h2>
-            <p>{petInfo.age}</p>
-          </ListItem>
-          <ListItem>
-            <h2>Size</h2>
-            <p>{petInfo.size}</p>
-          </ListItem>
-          <ListItem gender={petInfo.gender}>
-            <h2>Gender</h2>
-            <p>
-              {petInfo.gender === 'Male' ? (
-                <IoMdMale style={{ transform: 'translateY(2px)' }} />
-              ) : (
-                <IoMdFemale style={{ verticalAlign: 'middle' }} />
-              )}{' '}
-              {petInfo.gender}
-            </p>
-          </ListItem>
-        </PetInfoContainer>
-        <Miles>
+    <FlexCard onClick={changeVisibility}>
+      <ImgContainer>
+        <ImageSlider photos={petInfo.photos} type='card' />
+      </ImgContainer>
+      <PetInfoContainer>
+        <h1>{formatName(petInfo.name)}</h1>
+        <Breed>{getBreeds()}</Breed>
+        <ListItem>
+          <h2>Age</h2>
+          <p>{petInfo.age}</p>
+        </ListItem>
+        <ListItem>
+          <h2>Size</h2>
+          <p>{petInfo.size}</p>
+        </ListItem>
+        <ListItem gender={petInfo.gender}>
+          <h2>Gender</h2>
           <p>
-            {petInfo.distance.toFixed(2)} <span>miles</span>
+            {petInfo.gender === 'Male' ? (
+              <IoMdMale style={{ transform: 'translateY(2px)' }} />
+            ) : (
+              <IoMdFemale style={{ verticalAlign: 'middle' }} />
+            )}{' '}
+            {petInfo.gender}
           </p>
-        </Miles>
-      </FlexCard>
-    </Link>
+        </ListItem>
+        <AdditionalInformation visibility={visibility} />
+      </PetInfoContainer>
+      <Miles>
+        <p>
+          {petInfo.distance.toFixed(2)} <span>miles</span>
+        </p>
+      </Miles>
+    </FlexCard>
   );
 };
 

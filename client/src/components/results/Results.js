@@ -57,6 +57,7 @@ const Results = ({ params }) => {
     grid-row-gap: 3rem;
     margin: 2rem auto;
     grid-template-columns: 1fr;
+    align-items: start;
 
     @media (min-width: 700px) {
       grid-template-columns: 1fr 1fr;
