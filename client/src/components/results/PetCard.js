@@ -25,11 +25,11 @@ const PetCard = ({ petInfo }) => {
     return breeds;
   };
 
-  const formatName = name => {
+  const formatName = (name) => {
     /* Lowercase and then capitalize name */
     let formattedName = name
       .toLowerCase()
-      .replace(/\b\w/g, l => l.toUpperCase());
+      .replace(/\b\w/g, (l) => l.toUpperCase());
     formattedName =
       formattedName.length > 13
         ? `${formattedName.substring(0, 13)}...`
@@ -37,8 +37,6 @@ const PetCard = ({ petInfo }) => {
 
     return formattedName;
   };
-
-  console.log(petInfo.photos);
 
   const FlexCard = styled.article`
     display: flex;
@@ -89,7 +87,7 @@ const PetCard = ({ petInfo }) => {
     p {
       font-size: 1.25rem;
       font-weight: 600;
-      color: ${props =>
+      color: ${(props) =>
         !props.gender
           ? 'hsl(50,50%,30%)'
           : props.gender === 'Male'

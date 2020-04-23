@@ -8,7 +8,7 @@ require('dotenv').config();
 const app = express();
 app.use(express.json());
 app.use(cors());
-app.use(express.static(`${__dirname}/client/build`));
+// app.use(express.static(`${__dirname}/client/build`));
 
 app.post('/pets', async (req, res) => {
   try {
@@ -71,9 +71,9 @@ app.get('/:id', async (req, res) => {
   res.send(pet);
 });
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/client/build/index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '/client/build/index.html'));
+// });
 
 const port = 3005;
 

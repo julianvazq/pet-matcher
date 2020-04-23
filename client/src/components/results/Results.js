@@ -5,12 +5,16 @@ import { PetContext } from '../context/PetContext';
 import PetCard from './PetCard';
 import Alert from './Alert';
 import Loading from './Loading';
+import SearchContainer from './SearchContainer';
 
 const Results = () => {
   const { sizes, ages, genders, zip, distance } = useContext(PetContext);
   const [pets, setPets] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [params, setParams] = useState(null);
+
+  console.log('params: ', params);
 
   useEffect(() => {
     async function fetchPets() {
@@ -47,9 +51,9 @@ const Results = () => {
       const options = {
         method: 'POST',
         headers: {
-          'Content-type': 'application/json'
+          'Content-type': 'application/json',
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       };
       const resPets = await fetch('/pets', options);
 
@@ -120,7 +124,8 @@ const Results = () => {
     <Grid>
       {pets &&
         pets.map(
-          pet => pet.photos.length > 0 && <PetCard key={pet.id} petInfo={pet} />
+          (pet) =>
+            pet.photos.length > 0 && <PetCard key={pet.id} petInfo={pet} />
         )}
     </Grid>
   ) : (
@@ -136,6 +141,7 @@ const Results = () => {
       <HeadingContainer>
         <Title>Results</Title>
         <Subtitle>Click on a pet to learn more!</Subtitle>
+        <SearchContainer setParams={setParams} />
       </HeadingContainer>
       {isLoading ? (
         <Loading />

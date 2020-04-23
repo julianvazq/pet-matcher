@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import {
   IoIosArrowDropleftCircle,
   IoIosArrowDroprightCircle
@@ -30,7 +30,17 @@ const ImageSlider = ({ photos, type }) => {
     }
   };
 
+  const fadeIn = keyframes`
+        0% { 
+            opacity: 0; 
+        }
+        100% { 
+            opacity: 1; 
+        } 
+`;
+
   const Image = styled.img`
+    animation: ${fadeIn} 250ms ease-in;
     object-fit: cover;
     object-position: ${type === 'details' && 'center'};
     border-radius: ${type === 'details' && '0.5rem'};
