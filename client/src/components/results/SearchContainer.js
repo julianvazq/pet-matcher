@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PrimaryButton, Label, Input } from '../styles/styled-components';
 import {
   genderOptions,
@@ -23,9 +23,7 @@ const SearchContainer = ({ setParams }) => {
     ageOptions[1],
     ageOptions[2],
   ]);
-  const [selectedDistance, setSelectedDistance] = useState([
-    distanceOptions[2],
-  ]);
+  const [selectedDistance, setSelectedDistance] = useState(distanceOptions[2]);
   const [zipCode, setZipCode] = useState('');
 
   const handleGenders = (selectedGenders) => {
@@ -59,14 +57,28 @@ const SearchContainer = ({ setParams }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    sendParams();
+  };
+
+  const sendParams = () => {
+    const gendersArray = selectedGenders.map((gender) => gender.value);
+    const sizesArray = selectedSizes.map((size) => size.value);
+    const agesArray = selectedAges.map((age) => age.value);
+    const distance = selectedDistance.value;
+
     setParams({
-      gender: selectedGenders,
-      sizes: selectedSizes,
-      ages: selectedAges,
-      distance: selectedDistance,
-      zipCode: zipCode,
+      genders: gendersArray,
+      sizes: sizesArray,
+      ages: agesArray,
+      distance: distance,
+      zipCode: zipCode || '20850',
     });
   };
+
+  //   useEffect(() => {
+  //     sendParams();
+  //   }, []);
 
   return (
     <form onSubmit={handleSubmit}>

@@ -49,13 +49,8 @@ app.post('/pets', async (req, res) => {
 
 app.post('/test', async (req, res) => {
   try {
-    const {
-      sizesArray = ['small', 'medium', 'large'],
-      agesArray = ['baby', 'young', 'adult', 'senior'],
-      gendersArray = ['male', 'female'],
-      zip = 20850,
-      distance = 50,
-    } = req.body;
+    const { genders, sizes, ages, distance, zipCode } = req.body;
+    console.log(req.body);
     const resToken = await fetch('https://api.petfinder.com/v2/oauth2/token', {
       body: `grant_type=client_credentials&client_id=${process.env.API_KEY}&client_secret=${process.env.SECRET}`,
       headers: {
@@ -67,9 +62,9 @@ app.post('/test', async (req, res) => {
     const TOKEN = dataToken.access_token;
 
     const resPets = await fetch(
-      `https://api.petfinder.com/v2/animals?type=dog&status=adoptable&location=${zip}&distance=${distance}&size=${sizesArray.join(
+      `https://api.petfinder.com/v2/animals?type=dog&status=adoptable&location=${zipCode}&distance=${distance}&size=${sizes.join(
         ','
-      )}&age=${agesArray.join(',')}&gender=${gendersArray.join(',')}`,
+      )}&age=${ages.join(',')}&gender=${genders.join(',')}`,
       {
         headers: {
           Authorization: `Bearer ${TOKEN}`,

@@ -5,6 +5,7 @@ import PetContextProvider from './components/context/PetContext';
 import QuizList from './components/quiz/QuizList';
 import Results from './components/results/Results';
 import PetDetails from './components/results/PetDetails';
+import Home from './components/results/Home';
 
 /* CONVERT TO ASYNC/AWAIT */
 // Sample URL: https://api.petfinder.com/v2/animals?location=20850&type=dog&breed=pug
@@ -37,8 +38,8 @@ function App() {
       <div>
         <PetContextProvider>
           <Switch>
-            <Route path='/' exact component={QuizList} />
-            <Route path='/results' exact component={Results} />
+            <Route path='/' exact component={Home} />
+            {/* <Route path='/results' exact component={Results} /> */}
             <Route path='/results/:id' component={PetDetails} />
           </Switch>
         </PetContextProvider>

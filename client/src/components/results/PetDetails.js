@@ -208,7 +208,7 @@ const PetDetails = ({ match, history, petInfo }) => {
       <InfoContainer>
         <PrimaryDetails>
           <PetName>
-            {pet.name.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())}
+            {pet.name.toLowerCase().replace(/\b\w/g, (l) => l.toUpperCase())}
           </PetName>
           <Location>{`${pet.contact.address.city}, ${pet.contact.address.state}, ${pet.contact.address.postcode}`}</Location>
           <Description>{pet.description}</Description>
