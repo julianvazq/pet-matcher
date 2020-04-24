@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { IoMdFemale, IoMdMale } from 'react-icons/io';
+import { FaCarAlt } from 'react-icons/fa';
 import AdditionalInformation from './AdditionalInformation';
 import ToggleButton from './ToggleButton';
 
-const PetInformation = ({ petInfo }) => {
+const PetInformation = ({ petInfo, handleExpand }) => {
   const [visibility, setVisibility] = useState(false);
 
   const changeVisibility = () => {
@@ -29,10 +30,10 @@ const PetInformation = ({ petInfo }) => {
     let formattedName = name
       .toLowerCase()
       .replace(/\b\w/g, (l) => l.toUpperCase());
-    formattedName =
-      formattedName.length > 13
-        ? `${formattedName.substring(0, 13)}...`
-        : formattedName;
+    // formattedName =
+    //   formattedName.length > 16
+    //     ? `${formattedName.substring(0, 16)}...`
+    //     : formattedName;
 
     return formattedName;
   };
@@ -40,11 +41,26 @@ const PetInformation = ({ petInfo }) => {
   const PetInfoContainer = styled.div`
     flex: 1 1 0;
     padding: 0.125rem 1rem;
+  `;
 
-    h1 {
-      font-size: 1.75rem;
-      line-height: 1.125;
-      padding: 0.25rem 0;
+  const Name = styled.h1`
+    font-size: 1.5rem;
+    line-height: 1.125;
+    padding: 0.25rem 0 0.5rem 0;
+  `;
+
+  const Miles = styled.p`
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 700;
+    background: hsl(50, 40%, 75%);
+    color: hsl(50, 50%, 35%);
+    padding: 0.25rem 0.5rem;
+    border-radius: 30px;
+    margin-left: 0.25rem;
+
+    span {
+      font-weight: 600;
     }
   `;
 
@@ -62,13 +78,13 @@ const PetInformation = ({ petInfo }) => {
     color: hsl(55, 15%, 43%);
 
     h2 {
-      font-size: 1.125rem;
+      font-size: 1rem;
       font-weight: 400;
     }
 
     p {
-      font-size: 1.25rem;
-      font-weight: 600;
+      font-size: 1.125rem;
+      font-weight: 500;
       color: ${(props) =>
         !props.gender
           ? 'hsl(50,50%,30%)'
@@ -80,35 +96,26 @@ const PetInformation = ({ petInfo }) => {
     }
   `;
 
-  const Miles = styled.div`
-    width: 100%;
-    border-bottom-right-radius: 0.5rem;
-    background: hsl(50, 45%, 82%);
-    box-shadow: inset 0 1px 2px hsla(0, 0%, 0%, 0.1);
-    line-height: 1;
-
-    p {
-      font-size: 1.5rem;
-      font-weight: 600;
-      text-align: center;
-      padding: 0.5rem 1rem;
-      color: hsl(50, 19.6%, 37.1%);
-    }
-
-    span {
-      font-size: 1rem;
-      font-weight: 400;
-      vertical-align: middle;
-      letter-spacing: 1px;
-    }
-  `;
-
   console.log(petInfo);
 
   return (
     <>
       <PetInfoContainer>
-        <h1>{formatName(petInfo.name)}</h1>
+        <Name>
+          {formatName(petInfo.name)}{' '}
+          {
+            <Miles onClick={handleExpand}>
+              <FaCarAlt
+                style={{
+                  transform: 'translateY(2px)',
+                  fontSize: '0.9rem',
+                  marginRight: '5px',
+                }}
+              />
+              {petInfo.distance.toFixed(2)} <span>miles</span>
+            </Miles>
+          }
+        </Name>
         <Breed>{getBreeds()}</Breed>
         <ListItem>
           <h2>Age</h2>
@@ -129,7 +136,7 @@ const PetInformation = ({ petInfo }) => {
             {petInfo.gender}
           </p>
         </ListItem>
-        <AdditionalInformation visibility={visibility} />
+        <AdditionalInformation petInfo={petInfo} visibility={visibility} />
       </PetInfoContainer>
       <ToggleButton
         visibility={visibility}

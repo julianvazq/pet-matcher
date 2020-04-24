@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import PetInformation from './PetInformation';
 import ImageSlider from './ImageSlider';
 
 const PetCard = ({ petInfo }) => {
+  const [expand, setExpand] = useState(false);
+
+  const handleExpand = () => {
+    setExpand(!expand);
+  };
+
   const FlexCard = styled.article`
+    grid-column: ${expand ? '1/-1' : ''};
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -19,7 +26,7 @@ const PetCard = ({ petInfo }) => {
   return (
     <FlexCard>
       <ImageSlider photos={petInfo.photos} type='card' />
-      <PetInformation petInfo={petInfo} />
+      <PetInformation petInfo={petInfo} handleExpand={handleExpand} />
     </FlexCard>
   );
 };

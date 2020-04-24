@@ -39,6 +39,7 @@ const ImageSlider = ({ photos, type }) => {
   const Image = styled.img`
     animation: ${fadeIn} 250ms ease-in;
     object-fit: cover;
+    object-position: 50% 35%;
     object-position: ${type === 'details' && 'center'};
     border-radius: ${type === 'details' && '0.5rem'};
     display: block;

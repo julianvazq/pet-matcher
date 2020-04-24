@@ -48,7 +48,10 @@ const Results = ({ params }) => {
     grid-column-gap: 2rem;
     grid-row-gap: 3rem;
     margin: 2rem auto;
+    /* grid-template-columns: 1fr; */
+    /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
     grid-template-columns: 1fr;
+    grid-auto-flow: dense;
     align-items: start;
 
     @media (min-width: 700px) {
@@ -60,16 +63,6 @@ const Results = ({ params }) => {
   `;
 
   const displayPets = () => {
-    if (!params) {
-      return (
-        <Alert
-          message='Find pets in your area!'
-          action='Enter search input'
-          buttonText='Go back'
-        />
-      );
-    }
-
     if (pets.length) {
       return (
         <Grid>
@@ -91,6 +84,20 @@ const Results = ({ params }) => {
     }
   };
 
+  if (status === 'success') {
+    if (!params) {
+      return (
+        <Alert
+          message='Find pets in your area!'
+          action='Enter search input'
+          buttonText='Go back'
+        />
+      );
+    }
+
+    return displayPets();
+  }
+
   if (status === 'loading') {
     return <Loading />;
   }
@@ -103,10 +110,6 @@ const Results = ({ params }) => {
         buttonText='Go back.'
       />
     );
-  }
-
-  if (status === 'success') {
-    return displayPets();
   }
 };
 
