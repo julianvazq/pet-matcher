@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import ImageSlider from './ImageSlider';
 import { IoMdFemale, IoMdMale } from 'react-icons/io';
 import AdditionalInformation from './AdditionalInformation';
 import ToggleButton from './ToggleButton';
@@ -21,8 +20,6 @@ const PetInformation = ({ petInfo }) => {
     if (window.width >= 700) {
       breeds = breeds.length > 35 ? `${breeds.substring(0, 35)}...` : breeds;
     }
-    // const formattedBreeds =
-    //   breeds.length > 30 ? `${breeds.substring(0, 30)}...` : breeds;
 
     return breeds;
   };
@@ -39,24 +36,6 @@ const PetInformation = ({ petInfo }) => {
 
     return formattedName;
   };
-
-  // const FlexCard = styled.article`
-  //   display: flex;
-  //   flex-direction: column;
-  //   overflow: hidden;
-  //   background: hsl(50, 50%, 89%);
-  //   border-radius: 0.5rem;
-  //   box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.07),
-  //     0 6.7px 5.3px rgba(0, 0, 0, 0.05), 0 12.5px 10px rgba(0, 0, 0, 0.042),
-  //     0 22.3px 17.9px rgba(0, 0, 0, 0.035), 0 41.8px 33.4px rgba(0, 0, 0, 0.028),
-  //     0 100px 80px rgba(0, 0, 0, 0.02);
-  // `;
-
-  // const ImgContainer = styled.div`
-  //   flex: 0 1 200px;
-  //   background: rgba(0, 0, 0, 0);
-  //   position: relative;
-  // `;
 
   const PetInfoContainer = styled.div`
     flex: 1 1 0;
@@ -123,6 +102,8 @@ const PetInformation = ({ petInfo }) => {
       letter-spacing: 1px;
     }
   `;
+
+  console.log(petInfo);
 
   return (
     <>
