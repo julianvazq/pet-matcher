@@ -43,15 +43,26 @@ const PetInformation = ({
     return formattedName;
   };
 
+  const OuterContainer = styled.div`
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  `;
+
   const PetInfoContainer = styled.div`
     flex: 1 1 0;
     padding: 0.125rem 1rem;
+    /* display: ${expandCard ? 'flex' : ''}; */
+    display: ${expandCard && 'grid'};
+    grid-template-columns: ${expandCard && '40% auto'};
   `;
 
   const Name = styled.h1`
     font-size: 1.5rem;
     line-height: 1.125;
     padding: 0.25rem 0 0.5rem 0;
+    grid-column: 1/2;
+    align-self: center;
   `;
 
   const Miles = styled.p`
@@ -75,6 +86,14 @@ const PetInformation = ({
     color: hsl(55, 13%, 37%);
     margin-bottom: 0.5rem;
     line-height: 1.125;
+  `;
+
+  const Subtitle = styled.h2`
+    font-size: 1.25rem;
+    display: ${expandCard ? 'block' : visibility ? 'block' : 'none'};
+    grid-row: 1;
+    grid-column: 2/3;
+    align-self: center;
   `;
 
   const ListItem = styled.li`
@@ -104,7 +123,7 @@ const PetInformation = ({
   console.log(petInfo);
 
   return (
-    <>
+    <OuterContainer>
       <PetInfoContainer>
         <Name>
           {formatName(petInfo.name)}{' '}
@@ -121,27 +140,35 @@ const PetInformation = ({
             </Miles>
           }
         </Name>
-        <Breed>{getBreeds()}</Breed>
-        <ListItem>
-          <h2>Age</h2>
-          <p>{petInfo.age}</p>
-        </ListItem>
-        <ListItem>
-          <h2>Size</h2>
-          <p>{petInfo.size}</p>
-        </ListItem>
-        <ListItem gender={petInfo.gender}>
-          <h2>Gender</h2>
-          <p>
-            {petInfo.gender === 'Male' ? (
-              <IoMdMale style={{ transform: 'translateY(2px)' }} />
-            ) : (
-              <IoMdFemale style={{ verticalAlign: 'middle' }} />
-            )}{' '}
-            {petInfo.gender}
-          </p>
-        </ListItem>
-        <AdditionalInformation petInfo={petInfo} visibility={visibility} />
+        <div style={{ gridRow: 2 }}>
+          <Breed>{getBreeds()}</Breed>
+          <ListItem>
+            <h2>Age</h2>
+            <p>{petInfo.age}</p>
+          </ListItem>
+          <ListItem>
+            <h2>Size</h2>
+            <p>{petInfo.size}</p>
+          </ListItem>
+          <ListItem gender={petInfo.gender}>
+            <h2>Gender</h2>
+            <p>
+              {petInfo.gender === 'Male' ? (
+                <IoMdMale style={{ transform: 'translateY(2px)' }} />
+              ) : (
+                <IoMdFemale style={{ verticalAlign: 'middle' }} />
+              )}{' '}
+              {petInfo.gender}
+            </p>
+          </ListItem>
+        </div>
+        <Subtitle>Details</Subtitle>
+        <AdditionalInformation
+          petInfo={petInfo}
+          visibility={expandCard ? expandCard : visibility}
+          expandCard={expandCard}
+          style={{ gridRow: 2 }}
+        />
       </PetInfoContainer>
       <ToggleButton
         visibility={expandCard ? expandCard : visibility}
@@ -149,7 +176,7 @@ const PetInformation = ({
           handleExpandCard ? handleExpandCard : changeVisibility
         }
       />
-    </>
+    </OuterContainer>
   );
 };
 

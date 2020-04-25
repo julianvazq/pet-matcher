@@ -13,7 +13,7 @@ const PetCard = ({ petInfo, desktopView }) => {
   const FlexCard = styled.article`
     grid-column: ${expandCard ? '1/-1' : ''};
     display: flex;
-    flex-direction: column;
+    flex-direction: ${expandCard ? 'row' : 'column'};
     overflow: hidden;
     background: hsl(50, 50%, 89%);
     border-radius: 0.5rem;
@@ -25,7 +25,7 @@ const PetCard = ({ petInfo, desktopView }) => {
 
   return (
     <FlexCard>
-      <ImageSlider photos={petInfo.photos} type='card' />
+      <ImageSlider photos={petInfo.photos} expandCard={expandCard} />
       <PetInformation
         petInfo={petInfo}
         dekstopView={desktopView}
