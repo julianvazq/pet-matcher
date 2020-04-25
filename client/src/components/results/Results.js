@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Alert from './Alert';
 import Loading from './Loading';
-import PetCard from './PetCard';
+import PetGrid from './PetGrid';
 
 const Results = ({ params }) => {
   const [pets, setPets] = useState([]);
@@ -48,8 +48,6 @@ const Results = ({ params }) => {
     grid-column-gap: 2rem;
     grid-row-gap: 3rem;
     margin: 2rem auto;
-    /* grid-template-columns: 1fr; */
-    /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
     grid-template-columns: 1fr;
     grid-auto-flow: dense;
     align-items: start;
@@ -64,15 +62,7 @@ const Results = ({ params }) => {
 
   const displayPets = () => {
     if (pets.length) {
-      return (
-        <Grid>
-          {pets &&
-            pets.map(
-              (pet) =>
-                pet.photos.length > 0 && <PetCard key={pet.id} petInfo={pet} />
-            )}
-        </Grid>
-      );
+      return <PetGrid pets={pets} />;
     } else {
       return (
         <Alert

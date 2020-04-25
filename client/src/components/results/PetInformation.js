@@ -5,7 +5,12 @@ import { FaCarAlt } from 'react-icons/fa';
 import AdditionalInformation from './AdditionalInformation';
 import ToggleButton from './ToggleButton';
 
-const PetInformation = ({ petInfo, handleExpand }) => {
+const PetInformation = ({
+  petInfo,
+  desktopView,
+  expandCard,
+  handleExpandCard,
+}) => {
   const [visibility, setVisibility] = useState(false);
 
   const changeVisibility = () => {
@@ -104,7 +109,7 @@ const PetInformation = ({ petInfo, handleExpand }) => {
         <Name>
           {formatName(petInfo.name)}{' '}
           {
-            <Miles onClick={handleExpand}>
+            <Miles>
               <FaCarAlt
                 style={{
                   transform: 'translateY(2px)',
@@ -139,8 +144,10 @@ const PetInformation = ({ petInfo, handleExpand }) => {
         <AdditionalInformation petInfo={petInfo} visibility={visibility} />
       </PetInfoContainer>
       <ToggleButton
-        visibility={visibility}
-        changeVisibility={changeVisibility}
+        visibility={expandCard ? expandCard : visibility}
+        changeVisibility={
+          handleExpandCard ? handleExpandCard : changeVisibility
+        }
       />
     </>
   );
