@@ -51,16 +51,18 @@ const PetInformation = ({
 
   const PetInfoContainer = styled.div`
     flex: 1 1 0;
-    padding: 0.125rem 1rem;
+    padding: 0.125rem ${expandCard ? '2rem' : '1rem'};
     /* display: ${expandCard ? 'flex' : ''}; */
     display: ${expandCard && 'grid'};
-    grid-template-columns: ${expandCard && '40% auto'};
+    grid-template-columns: ${expandCard && '30% auto'};
+    grid-column-gap: 3rem;
   `;
 
   const Name = styled.h1`
     font-size: 1.5rem;
     line-height: 1.125;
     padding: 0.25rem 0 0.5rem 0;
+    padding-bottom: ${expandCard && '0'};
     grid-column: 1/2;
     align-self: center;
   `;
@@ -73,7 +75,8 @@ const PetInformation = ({
     color: hsl(50, 50%, 35%);
     padding: 0.25rem 0.5rem;
     border-radius: 30px;
-    margin-left: 0.25rem;
+    margin-left: ${expandCard ? '0' : '0.25rem'};
+    margin: ${expandCard && '0 0 0.75rem 0'};
 
     span {
       font-weight: 600;
@@ -84,7 +87,7 @@ const PetInformation = ({
     font-size: 1.125rem;
     font-weight: 600;
     color: hsl(55, 13%, 37%);
-    margin-bottom: 0.5rem;
+    margin-bottom: ${expandCard ? '1rem' : '0.5rem'};
     line-height: 1.125;
   `;
 
@@ -120,14 +123,14 @@ const PetInformation = ({
     }
   `;
 
-  console.log(petInfo);
+  // console.log(petInfo);
 
   return (
     <OuterContainer>
       <PetInfoContainer>
         <Name>
-          {formatName(petInfo.name)}{' '}
-          {
+          {formatName(petInfo.name)}
+          {!expandCard && (
             <Miles>
               <FaCarAlt
                 style={{
@@ -138,9 +141,21 @@ const PetInformation = ({
               />
               {petInfo.distance.toFixed(2)} <span>miles</span>
             </Miles>
-          }
+          )}
         </Name>
         <div style={{ gridRow: 2 }}>
+          {expandCard && (
+            <Miles>
+              <FaCarAlt
+                style={{
+                  transform: 'translateY(2px)',
+                  fontSize: '0.9rem',
+                  marginRight: '5px',
+                }}
+              />
+              {petInfo.distance.toFixed(2)} <span>miles</span>
+            </Miles>
+          )}
           <Breed>{getBreeds()}</Breed>
           <ListItem>
             <h2>Age</h2>

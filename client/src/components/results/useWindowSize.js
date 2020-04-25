@@ -3,8 +3,10 @@ import { useLayoutEffect, useState } from 'react';
 const useWindowSize = () => {
   const [size, setSize] = useState(0);
   useLayoutEffect(() => {
+    let timer = null;
     function updateSize() {
-      setSize(window.innerWidth);
+      clearTimeout(timer);
+      timer = setTimeout(() => setSize(window.innerWidth), 300);
     }
     window.addEventListener('resize', updateSize);
     updateSize();

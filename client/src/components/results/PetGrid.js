@@ -4,16 +4,18 @@ import PetCard from './PetCard';
 import useWindowSize from './useWindowSize';
 
 const PetGrid = ({ pets }) => {
-  const [width] = useWindowSize();
-  const [desktopView, setDesktopView] = useState(false);
+  // const [width] = useWindowSize();
+  const [desktopView, setDesktopView] = useState(true);
 
-  useEffect(() => {
-    if (width > 700) {
-      setDesktopView(true);
-    } else {
-      setDesktopView(false);
-    }
-  }, [width]);
+  // useEffect(() => {
+  //   if (width > 700) {
+  //     setDesktopView(true);
+  //   } else {
+  //     setDesktopView(false);
+  //   }
+  // }, [width]);
+
+  // console.log('width: ', width);
 
   const Grid = styled.div`
     display: grid;
