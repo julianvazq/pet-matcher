@@ -5,7 +5,7 @@ import {
   IoIosArrowDroprightCircle,
 } from 'react-icons/io';
 
-const ImageSlider = ({ photos, expandCard }) => {
+const ImageSlider = ({ photos, url, expandCard }) => {
   const [currentPhoto, setCurrentPhoto] = useState(0);
 
   const nextPhoto = (e) => {
@@ -37,7 +37,7 @@ const ImageSlider = ({ photos, expandCard }) => {
 `;
 
   const Image = styled.img`
-    animation: ${fadeIn} 250ms ease-in;
+    /* animation: ${fadeIn} 250ms ease-in; */
     object-fit: cover;
     object-position: 50% 35%;
     object-position: center;
@@ -46,13 +46,28 @@ const ImageSlider = ({ photos, expandCard }) => {
     height: ${expandCard ? '300px' : '275px'};
     border-radius: 0.5rem;
     border-top-right-radius: ${expandCard ? '0' : '0.5rem'};
-    border-bottom-right-radius: ${expandCard ? '0' : '0.5rem'};
+    border-bottom-right-radius: 0;
   `;
 
   const ImgContainer = styled.div`
+    animation: ${fadeIn} 250ms ease-in;
     flex: 0 1 200px;
     background: rgba(0, 0, 0, 0);
     position: relative;
+  `;
+
+  const AdoptButton = styled.a`
+    display: inline-block;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    color: hsl(50, 40%, 20%);
+    background: hsl(50, 40%, 75%);
+    border-top-right-radius: 0.5rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    box-shadow: ${!expandCard &&
+    'inset 0px -10px 18px -19px hsla(50, 50%, 10%, 0.8)'};
   `;
 
   const PreviousArrow = styled(IoIosArrowDropleftCircle)`
@@ -77,6 +92,9 @@ const ImageSlider = ({ photos, expandCard }) => {
 
   return (
     <ImgContainer>
+      <AdoptButton href={url} target='_blank'>
+        Adopt Me
+      </AdoptButton>
       {photos[1] && (
         <>
           <PreviousArrow onClick={previousPhoto}>{'<'}</PreviousArrow>

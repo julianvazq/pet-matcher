@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
 import Alert from './Alert';
 import Loading from './Loading';
 import PetGrid from './PetGrid';
@@ -10,6 +9,7 @@ const Results = ({ params }) => {
 
   useEffect(() => {
     async function fetchPets() {
+      console.log('2. fetching pets');
       const options = {
         method: 'POST',
         headers: {
@@ -30,6 +30,7 @@ const Results = ({ params }) => {
 
       setPets(pets);
       setStatus('success');
+      console.log('3. fetchED pets');
     }
 
     try {
@@ -42,23 +43,6 @@ const Results = ({ params }) => {
       console.log('Oh no, something went wrong', e);
     }
   }, [params]);
-
-  const Grid = styled.div`
-    display: grid;
-    grid-column-gap: 2rem;
-    grid-row-gap: 3rem;
-    margin: 2rem auto;
-    grid-template-columns: 1fr;
-    grid-auto-flow: dense;
-    align-items: start;
-
-    @media (min-width: 700px) {
-      grid-template-columns: 1fr 1fr;
-    }
-    @media (min-width: 1100px) {
-      grid-template-columns: 1fr 1fr 1fr;
-    }
-  `;
 
   const displayPets = () => {
     if (pets.length) {

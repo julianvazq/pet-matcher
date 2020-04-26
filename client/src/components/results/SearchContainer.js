@@ -8,7 +8,7 @@ import {
 } from './searchOptions';
 import Select from 'react-select';
 
-const SearchContainer = ({ setParams }) => {
+const SearchContainer = ({ handleParams }) => {
   const [selectedGenders, setSelectedGenders] = useState([
     genderOptions[0],
     genderOptions[1],
@@ -67,7 +67,7 @@ const SearchContainer = ({ setParams }) => {
     const agesArray = selectedAges.map((age) => age.value);
     const distance = selectedDistance.value;
 
-    setParams({
+    handleParams({
       genders: gendersArray,
       sizes: sizesArray,
       ages: agesArray,
@@ -75,10 +75,6 @@ const SearchContainer = ({ setParams }) => {
       zipCode: zipCode || '20850',
     });
   };
-
-  //   useEffect(() => {
-  //     sendParams();
-  //   }, []);
 
   return (
     <form onSubmit={handleSubmit}>

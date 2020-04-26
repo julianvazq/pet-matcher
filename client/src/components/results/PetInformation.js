@@ -5,12 +5,7 @@ import { FaCarAlt } from 'react-icons/fa';
 import AdditionalInformation from './AdditionalInformation';
 import ToggleButton from './ToggleButton';
 
-const PetInformation = ({
-  petInfo,
-  desktopView,
-  expandCard,
-  handleExpandCard,
-}) => {
+const PetInformation = ({ petInfo, expandCard, handleExpandCard }) => {
   const [visibility, setVisibility] = useState(false);
 
   const changeVisibility = () => {
@@ -35,24 +30,23 @@ const PetInformation = ({
     let formattedName = name
       .toLowerCase()
       .replace(/\b\w/g, (l) => l.toUpperCase());
-    // formattedName =
-    //   formattedName.length > 16
-    //     ? `${formattedName.substring(0, 16)}...`
-    //     : formattedName;
+    formattedName =
+      formattedName.length > 22
+        ? `${formattedName.substring(0, 22)}...`
+        : formattedName;
 
     return formattedName;
   };
 
   const OuterContainer = styled.div`
     flex: 1;
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
   `;
 
   const PetInfoContainer = styled.div`
     flex: 1 1 0;
     padding: 0.125rem ${expandCard ? '2rem' : '1rem'};
-    /* display: ${expandCard ? 'flex' : ''}; */
     display: ${expandCard && 'grid'};
     grid-template-columns: ${expandCard && '30% auto'};
     grid-column-gap: 3rem;
@@ -75,7 +69,7 @@ const PetInformation = ({
     color: hsl(50, 50%, 35%);
     padding: 0.25rem 0.5rem;
     border-radius: 30px;
-    margin-left: ${expandCard ? '0' : '0.25rem'};
+    margin-left: ${expandCard ? '0' : '0.5rem'};
     margin: ${expandCard && '0 0 0.75rem 0'};
 
     span {
@@ -93,10 +87,12 @@ const PetInformation = ({
 
   const Subtitle = styled.h2`
     font-size: 1.25rem;
+    color: hsl(50, 6%, 36%);
     display: ${expandCard ? 'block' : visibility ? 'block' : 'none'};
     grid-row: 1;
     grid-column: 2/3;
     align-self: center;
+    margin: ${!expandCard && '1rem 0 0.75rem 0'};
   `;
 
   const ListItem = styled.li`

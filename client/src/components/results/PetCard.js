@@ -25,7 +25,11 @@ const PetCard = ({ petInfo, desktopView }) => {
 
   return (
     <FlexCard>
-      <ImageSlider photos={petInfo.photos} expandCard={expandCard} />
+      <ImageSlider
+        photos={petInfo.photos}
+        url={petInfo.url}
+        expandCard={expandCard}
+      />
       <PetInformation
         petInfo={petInfo}
         dekstopView={desktopView}
