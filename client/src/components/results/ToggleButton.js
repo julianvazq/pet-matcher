@@ -10,6 +10,7 @@ const Toggle = styled.div`
   box-shadow: inset 0 1px 2px hsla(0, 0%, 0%, 0.1);
   line-height: 1;
   position: relative;
+  cursor: pointer;
 
   p {
     font-size: 1.25rem;

@@ -1,19 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import PetInformation from './PetInformation';
 import ImageSlider from './ImageSlider';
+import useIsFirstRender from '../hooks/useIsFirstRender';
 
 const PetCard = ({ petInfo, desktopView }) => {
+  const cardRef = useRef();
+  const isFirstRender = useIsFirstRender();
   const [expandCard, setExpandCard] = useState(false);
 
   const handleExpandCard = () => {
     setExpandCard(!expandCard);
   };
 
+  useEffect(() => {
+    if (!isFirstRender) {
+      cardRef.current.scrollIntoView();
+    }
+  }, [expandCard]);
+
   const FlexCard = styled.article`
-    grid-column: ${expandCard ? '1/-1' : ''};
+    grid-column: ${(props) => (props.expandCard ? '1/-1' : '')};
     display: flex;
-    flex-direction: ${expandCard ? 'row' : 'column'};
+    flex-direction: ${(props) => (props.expandCard ? 'row' : 'column')};
     overflow: hidden;
     background: hsl(50, 50%, 89%);
     border-radius: 0.5rem;
@@ -24,7 +33,7 @@ const PetCard = ({ petInfo, desktopView }) => {
   `;
 
   return (
-    <FlexCard>
+    <FlexCard expandCard={expandCard} ref={cardRef}>
       <ImageSlider
         photos={petInfo.photos}
         url={petInfo.url}

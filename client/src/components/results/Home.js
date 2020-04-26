@@ -9,7 +9,6 @@ const Home = () => {
 
   const handleParams = (newParams) => {
     setParams(newParams);
-    console.log('1. submitted params');
   };
 
   return (

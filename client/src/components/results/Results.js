@@ -9,7 +9,6 @@ const Results = ({ params }) => {
 
   useEffect(() => {
     async function fetchPets() {
-      console.log('2. fetching pets');
       const options = {
         method: 'POST',
         headers: {
@@ -21,16 +20,15 @@ const Results = ({ params }) => {
       console.log(resPets);
 
       // Checks if response is ok (200)
-      // if (!resPets.ok) {
-      //   setStatus('error');
-      //   return;
-      // }
+      if (!resPets.ok) {
+        setStatus('error');
+        return;
+      }
 
       const pets = await resPets.json();
 
       setPets(pets);
       setStatus('success');
-      console.log('3. fetchED pets');
     }
 
     try {
