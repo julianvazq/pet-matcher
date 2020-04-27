@@ -7,6 +7,7 @@ import { PageContainer } from '../styles/styled-components';
 const Home = () => {
   const [params, setParams] = useState(null);
 
+  console.log('params: ', params);
   const handleParams = (newParams) => {
     setParams(newParams);
   };

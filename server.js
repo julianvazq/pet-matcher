@@ -77,7 +77,7 @@ app.post('/test', async (req, res) => {
     );
     const pets = await resPets.json();
 
-    res.send(pets.animals);
+    res.send(pets.animals || { status: '404', ok: 'false' });
   } catch (e) {
     console.log(e);
   }

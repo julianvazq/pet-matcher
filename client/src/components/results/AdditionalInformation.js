@@ -36,28 +36,42 @@ const CloseIcon = styled(IoIosCloseCircle)`
   color: #b64848;
 `;
 
+const DynamicDiv = styled.div`
+  display: ${(props) => (props.visibility ? 'block' : 'none')};
+  border-top: ${(props) =>
+    !props.expandCard && '1.5px solid hsla(50, 34%, 15%, 0.2)'};
+  padding-top: ${(props) => (props.expandCard ? '0' : '0.75rem')};
+  position: relative;
+
+  &:before {
+    content: '';
+    height: 100%;
+    width: 1.5px;
+    background: hsla(50, 34%, 15%, 0.2);
+    position: absolute;
+    left: -40px;
+    top: -14%;
+  }
+`;
+
+const List = styled.ul`
+  list-style-type: none;
+  display: grid;
+
+  @media (min-width: 375px) {
+    grid-column-gap: ${(props) => (props.expandCard ? '3rem' : '1rem')};
+    grid-template-columns: ${(props) =>
+      props.expandCard ? '' : 'repeat(2, 1fr)'};
+    grid-template-rows: ${(props) =>
+      props.expandCard ? 'repeat(3, auto)' : ''};
+    grid-auto-flow: ${(props) => (props.expandCard ? 'column' : '')};
+  }
+`;
+
 const AdditionalInformation = ({ petInfo, visibility, expandCard }) => {
-  const DynamicDiv = styled.div`
-    display: ${visibility ? 'block' : 'none'};
-    border-top: ${!expandCard && '1.5px solid hsla(50, 34%, 15%, 0.2)'};
-    padding-top: ${expandCard ? '0' : '0.75rem'};
-  `;
-
-  const List = styled.ul`
-    list-style-type: none;
-    display: grid;
-
-    @media (min-width: 375px) {
-      grid-column-gap: ${expandCard ? '3rem' : '1rem'};
-      grid-template-columns: ${expandCard ? '' : 'repeat(2, 1fr)'};
-      grid-template-rows: ${expandCard ? 'repeat(3, auto)' : ''};
-      grid-auto-flow: ${expandCard ? 'column' : ''};
-    }
-  `;
-
   return (
-    <DynamicDiv>
-      <List>
+    <DynamicDiv expandCard={expandCard} visibility={visibility ? 1 : 0}>
+      <List expandCard={expandCard}>
         {petInfo.coat && (
           <ListItem>
             <h2>Coat</h2>
