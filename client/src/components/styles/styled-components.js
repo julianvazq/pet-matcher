@@ -3,8 +3,8 @@ import styled from 'styled-components';
 export const PageContainer = styled.section`
   max-width: 1200px;
   min-height: 90vh;
-  margin: 2rem 0.5rem;
-  padding: 2rem 0.5rem;
+  margin: 2rem 0;
+  padding: 2rem 1rem;
   border-radius: 0.5rem;
   background: hsl(57, 50%, 95%);
   box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.07),
@@ -14,6 +14,7 @@ export const PageContainer = styled.section`
 
   @media (min-width: 600px) {
     padding: 2rem;
+    margin: 2rem 1rem;
   }
 
   @media (min-width: 1200px) {
@@ -70,41 +71,7 @@ export const Label = styled.label`
   position: relative;
   font-size: 1.25rem;
   font-weight: 600;
-  margin-bottom: 1rem;
-`;
-
-export const Input = styled.input`
-  height: 30px;
-  width: 150px;
-  border-radius: 0.2rem;
-  border: none;
-  padding: 0 0.5rem;
-  font-size: 1.25rem;
-
-  &:focus {
-    border-color: hsla(50, 38%, 88%, 0.7);
-  }
-`;
-
-export const PrimaryButton = styled.button`
-  font-size: 1.5rem;
-  font-weight: 700;
-  letter-spacing: -0.5px;
-  padding: 0.5rem 1rem;
-  border-radius: 0.2rem;
-  color: inherit;
-  cursor: pointer;
-  background: hsl(0, 0%, 79%);
-  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.07);
-  display: inline-block;
-
-  &:hover {
-    opacity: 0.9;
-  }
-`;
-
-export const SecondaryButton = styled(PrimaryButton)`
-  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
 `;
 
 export const Validation = styled.p`

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Heading from './Heading';
-import SearchContainer from './SearchContainer';
+import SearchContainer from './search/SearchContainer';
 import Results from './Results';
 import { PageContainer } from '../styles/styled-components';
 

@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { PrimaryButton, Label, Input } from '../styles/styled-components';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import {
   genderOptions,
@@ -7,11 +6,48 @@ import {
   ageOptions,
   distanceOptions,
 } from './searchOptions';
-import Select from 'react-select';
+import CustomSelect from './CustomSelect';
+import CustomInput from './CustomInput';
+
+const FormGrid = styled.form`
+  display: grid;
+  grid-template-columns: 1fr;
+
+  @media (min-width: 600px) {
+    max-width: 80%;
+    margin: auto;
+  }
+
+  @media (min-width: 800px) {
+    max-width: 700px;
+  }
+`;
+
+const PrimaryButton = styled.button`
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  padding: 0.5rem 1rem;
+  border-radius: 0.2rem;
+  color: inherit;
+  cursor: pointer;
+  background: hsl(0, 0%, 79%);
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.07);
+  display: block;
+  margin: 2rem auto 0 auto;
+  width: 100%;
+
+  &:hover {
+    opacity: 0.9;
+  }
+`;
 
 const ValidationMessage = styled.p`
-  /* opacity: ${(props) => (props.isZipCodeValid ? 0 : 1)}; */
-  /* transition: opacity 250ms ease-in; */
+  margin-top: 0.25rem;
+
+  @media (min-width: 600px) {
+    text-align: right;
+  }
 `;
 
 const SearchContainer = ({ handleParams }) => {
@@ -120,42 +156,43 @@ const SearchContainer = ({ handleParams }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Select
-        isMulti
-        value={selectedGenders}
-        onChange={handleGenders}
-        options={genderOptions}
-      />
-      <Select
-        isMulti
-        value={selectedSizes}
-        onChange={handleSizes}
-        options={sizeOptions}
-      />
-      <Select
-        isMulti
-        value={selectedAges}
-        onChange={handleAges}
-        options={ageOptions}
-      />
-      <Select
-        value={selectedDistance}
-        onChange={handleDistance}
-        options={distanceOptions}
-      />
-      <Input
-        type='number'
-        maxLength='5'
-        placeholder='Enter zip code...'
-        value={zipCode}
-        onChange={handleZipCode}
-      />
-      {isZipCodeValid === false && (
-        <ValidationMessage isZipCodeValid={isZipCodeValid}>
-          {validationMessage}
-        </ValidationMessage>
-      )}
-      <PrimaryButton type='submit'>Search</PrimaryButton>
+      <FormGrid>
+        <CustomSelect
+          isMulti={true}
+          value={selectedGenders}
+          onChange={handleGenders}
+          options={genderOptions}
+          label='Genders'
+        />
+        <CustomSelect
+          isMulti={true}
+          value={selectedSizes}
+          onChange={handleSizes}
+          options={sizeOptions}
+          label='Sizes'
+        />
+        <CustomSelect
+          isMulti={true}
+          value={selectedAges}
+          onChange={handleAges}
+          options={ageOptions}
+          label='Ages'
+        />
+        <CustomSelect
+          isMulti={false}
+          value={selectedDistance}
+          onChange={handleDistance}
+          options={distanceOptions}
+          label='Maximum distance'
+        />
+        <CustomInput value={zipCode} onChange={handleZipCode} />
+        {isZipCodeValid === false && (
+          <ValidationMessage isZipCodeValid={isZipCodeValid}>
+            {validationMessage}
+          </ValidationMessage>
+        )}
+        <PrimaryButton type='submit'>Search</PrimaryButton>
+      </FormGrid>
     </form>
   );
 };

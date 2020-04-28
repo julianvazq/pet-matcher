@@ -2,8 +2,8 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import PetContextProvider from './components/context/PetContext';
-import PetDetails from './components/results/PetDetails';
-import Home from './components/results/Home';
+import PetDetails from './components/home/PetDetails';
+import Home from './components/home/Home';
 
 function App() {
   return (
