@@ -9,10 +9,6 @@ const Heading = () => {
     padding-bottom: 1rem;
     border-bottom: 2px solid hsla(50, 34%, 15%, 0.2);
     text-align: center;
-
-    @media (min-width: 600px) {
-      /* padding-bottom: 2rem; */
-    }
   `;
 
   const Title = styled.h1`
@@ -26,20 +22,11 @@ const Heading = () => {
   `;
 
   const Subtitle = styled.h2`
+    font-size: 1.25rem;
     font-weight: 600;
     position: relative;
     padding-bottom: 1rem;
     color: hsl(50, 10%, 45%);
-
-    /* &:after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: hsla(50, 34%, 15%, 0.2);
-    } */
   `;
 
   const FoodBowlIcon = styled(GiDogBowl)`

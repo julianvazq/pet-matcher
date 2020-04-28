@@ -47,9 +47,6 @@ app.post('/pets', async (req, res) => {
   }
 });
 
-// Get and store TOKEN
-app.get('/token', async (req, res) => {});
-
 app.post('/test', async (req, res) => {
   try {
     const { genders, sizes, ages, distance, zipCode } = req.body;
@@ -66,7 +63,7 @@ app.post('/test', async (req, res) => {
     const TOKEN = dataToken.access_token;
 
     const resPets = await fetch(
-      `https://api.petfinder.com/v2/animals?type=dog&status=adoptable&location=${zipCode}&distance=${distance}&size=${sizes.join(
+      `https://api.petfinder.com/v2/animals?type=dog&status=adoptable&location=${zipCode}&distance=${distance}&limit=${28}&size=${sizes.join(
         ','
       )}&age=${ages.join(',')}&gender=${genders.join(',')}`,
       {
