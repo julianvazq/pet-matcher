@@ -1,26 +1,37 @@
 import React from 'react';
 import styled from 'styled-components';
+import { GiDogBowl } from 'react-icons/gi';
+import { MdPets } from 'react-icons/md';
 
 const Heading = () => {
   const HeadingContainer = styled.div`
-    margin: 0 1rem;
+    margin: 0 1rem 2rem 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid hsla(50, 34%, 15%, 0.2);
+    text-align: center;
 
     @media (min-width: 600px) {
-      margin: 0;
+      /* padding-bottom: 2rem; */
     }
   `;
 
   const Title = styled.h1`
-    font-size: 2rem;
+    font-size: 2.5rem;
     margin-bottom: 0.5rem;
+    font-family: 'Mali', cursive;
+
+    @media (min-width: 375px) {
+      font-size: 3rem;
+    }
   `;
 
   const Subtitle = styled.h2`
     font-weight: 600;
     position: relative;
     padding-bottom: 1rem;
+    color: hsl(50, 10%, 45%);
 
-    &:after {
+    /* &:after {
       content: '';
       position: absolute;
       bottom: 0;
@@ -28,15 +39,26 @@ const Heading = () => {
       width: 100%;
       height: 2px;
       background: hsla(50, 34%, 15%, 0.2);
-    }
+    } */
   `;
+
+  const FoodBowlIcon = styled(GiDogBowl)`
+    font-size: 2rem;
+    margin-left: 0.5rem;
+  `;
+
+  const PawIcon = styled(MdPets)`
+    font-size: 2rem;
+    margin-right: 0.5rem;
+  `;
+
   return (
-    <div>
-      <HeadingContainer>
-        <Title>Results</Title>
-        <Subtitle>Click on a pet to learn more!</Subtitle>
-      </HeadingContainer>
-    </div>
+    <HeadingContainer>
+      <PawIcon />
+      <FoodBowlIcon />
+      <Title>Dog Finder</Title>
+      <Subtitle>Find your ideal companion.</Subtitle>
+    </HeadingContainer>
   );
 };
 

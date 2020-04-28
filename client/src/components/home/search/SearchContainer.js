@@ -9,7 +9,7 @@ import {
 import CustomSelect from './CustomSelect';
 import CustomInput from './CustomInput';
 
-const FormGrid = styled.form`
+const FormGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr;
 
