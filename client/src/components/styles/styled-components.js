@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export const PageContainer = styled.section`
   max-width: 1200px;
@@ -77,4 +77,13 @@ export const Label = styled.label`
 
 export const Validation = styled.p`
   color: #cc0000;
+`;
+
+export const fadeIn = keyframes`
+        0% { 
+            opacity: 0; 
+        }
+        100% { 
+            opacity: 1; 
+        } 
 `;

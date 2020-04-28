@@ -10,47 +10,10 @@ app.use(express.json());
 app.use(cors());
 // app.use(express.static(`${__dirname}/client/build`));
 
-app.post('/pets', async (req, res) => {
-  try {
-    const {
-      sizesArray = ['small', 'medium', 'large'],
-      agesArray = ['baby', 'young', 'adult', 'senior'],
-      gendersArray = ['male', 'female'],
-      zip = 20850,
-      distance = 50,
-    } = req.body;
-    const resToken = await fetch('https://api.petfinder.com/v2/oauth2/token', {
-      body: `grant_type=client_credentials&client_id=${process.env.API_KEY}&client_secret=${process.env.SECRET}`,
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      method: 'POST',
-    });
-    const dataToken = await resToken.json();
-    const TOKEN = dataToken.access_token;
-
-    const resPets = await fetch(
-      `https://api.petfinder.com/v2/animals?type=dog&status=adoptable&location=${zip}&distance=${distance}&size=${sizesArray.join(
-        ','
-      )}&age=${agesArray.join(',')}&gender=${gendersArray.join(',')}`,
-      {
-        headers: {
-          Authorization: `Bearer ${TOKEN}`,
-        },
-      }
-    );
-    const pets = await resPets.json();
-
-    res.send(pets.animals);
-  } catch (e) {
-    console.log(e);
-  }
-});
-
-app.post('/test', async (req, res) => {
+app.post('/pets/:page', async (req, res) => {
   try {
     const { genders, sizes, ages, distance, zipCode } = req.body;
-    console.log(req.body);
+    const { page } = req.params;
 
     const resToken = await fetch('https://api.petfinder.com/v2/oauth2/token', {
       body: `grant_type=client_credentials&client_id=${process.env.API_KEY}&client_secret=${process.env.SECRET}`,
@@ -63,7 +26,7 @@ app.post('/test', async (req, res) => {
     const TOKEN = dataToken.access_token;
 
     const resPets = await fetch(
-      `https://api.petfinder.com/v2/animals?type=dog&status=adoptable&location=${zipCode}&distance=${distance}&limit=${28}&size=${sizes.join(
+      `https://api.petfinder.com/v2/animals?type=dog&status=adoptable&location=${zipCode}&distance=${distance}&limit=${28}&page=${page}&size=${sizes.join(
         ','
       )}&age=${ages.join(',')}&gender=${genders.join(',')}`,
       {
@@ -74,7 +37,7 @@ app.post('/test', async (req, res) => {
     );
     const pets = await resPets.json();
 
-    res.send(pets.animals || { status: '404', ok: 'false' });
+    res.send(pets || { status: '404', ok: 'false' });
   } catch (e) {
     console.log(e);
   }

@@ -34,6 +34,7 @@ const SelectContainer = styled.div`
 const StyledSelect = styled(Select)`
   margin-bottom: 0.5rem;
   display: inline-block;
+  font-size: 1.125rem;
   font-weight: 600;
 
   @media (min-width: 600px) {

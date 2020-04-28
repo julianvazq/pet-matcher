@@ -1,20 +1,13 @@
 import React, { useState } from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
+import { fadeIn } from '../styles/styled-components';
 import {
   IoIosArrowDropleftCircle,
   IoIosArrowDroprightCircle,
 } from 'react-icons/io';
 
-const fadeIn = keyframes`
-        0% { 
-            opacity: 0; 
-        }
-        100% { 
-            opacity: 1; 
-        } 
-`;
-
 const Image = styled.img`
+  animation: ${fadeIn} 250ms ease-in;
   object-fit: cover;
   object-position: 50% 35%;
   object-position: center;
@@ -40,11 +33,17 @@ const AdoptButton = styled.a`
   color: hsl(50, 40%, 20%);
   background: hsl(50, 40%, 75%);
   border-top-right-radius: 0.5rem;
+  opacity: 1;
+  transition: opacity 250ms ease-in;
   position: absolute;
   bottom: 0;
   left: 0;
   box-shadow: ${(props) =>
     !props.expandCard && 'inset 0px -10px 18px -19px hsla(50, 50%, 10%, 0.8)'};
+
+  &:hover {
+    opacity: 0.9;
+  }
 `;
 
 const PreviousArrow = styled(IoIosArrowDropleftCircle)`
@@ -52,9 +51,15 @@ const PreviousArrow = styled(IoIosArrowDropleftCircle)`
   color: hsla(50, 50%, 89%, 0.7);
   font-size: 4rem;
   padding: 0.5rem;
+  transform: scale(1);
+  transition: transform 250ms ease-in;
   position: absolute;
   top: 0%;
   left: 0%;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 const NextArrow = styled(IoIosArrowDroprightCircle)`
@@ -62,9 +67,15 @@ const NextArrow = styled(IoIosArrowDroprightCircle)`
   color: hsla(50, 50%, 89%, 0.7);
   font-size: 4rem;
   padding: 0.5rem;
+  transform: scale(1);
+  transition: transform 250ms ease-in;
   position: absolute;
   top: 0%;
   right: 0%;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 const ImageSlider = ({ photos, url, expandCard }) => {

@@ -8,6 +8,7 @@ import {
 } from './searchOptions';
 import CustomSelect from './CustomSelect';
 import CustomInput from './CustomInput';
+import { IoMdSearch } from 'react-icons/io';
 
 const FormGrid = styled.div`
   display: grid;
@@ -40,6 +41,12 @@ const PrimaryButton = styled.button`
   &:hover {
     opacity: 0.9;
   }
+`;
+
+const SearchIcon = styled(IoMdSearch)`
+  transform: translateY(3.5px);
+  margin-right: 0.25rem;
+  font-size: 1.5rem;
 `;
 
 const ValidationMessage = styled.p`
@@ -191,7 +198,9 @@ const SearchContainer = ({ handleParams }) => {
             {validationMessage}
           </ValidationMessage>
         )}
-        <PrimaryButton type='submit'>Search</PrimaryButton>
+        <PrimaryButton type='submit'>
+          <SearchIcon /> Search
+        </PrimaryButton>
       </FormGrid>
     </form>
   );

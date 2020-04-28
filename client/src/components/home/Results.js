@@ -6,9 +6,29 @@ import PetGrid from './PetGrid';
 const Results = ({ params }) => {
   const [pets, setPets] = useState([]);
   const [status, setStatus] = useState('success');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(null);
+  const [totalResults, setTotalResults] = useState(null);
+  const [loadingMore, setLoadingMore] = useState(false);
 
   useEffect(() => {
-    async function fetchPets() {
+    if (params) {
+      fetchPets(currentPage);
+    }
+  }, [params]);
+
+  useEffect(() => {
+    if (params) {
+      fetchNextPage(currentPage);
+    }
+  }, [currentPage]);
+
+  useEffect(() => {}, [currentPage]);
+
+  const fetchNextPage = async (page) => {
+    setLoadingMore(true);
+
+    try {
       const options = {
         method: 'POST',
         headers: {
@@ -16,8 +36,31 @@ const Results = ({ params }) => {
         },
         body: JSON.stringify(params),
       };
-      const resPets = await fetch('/test', options);
-      console.log(resPets);
+      const resPets = await fetch(`/pets/${page}`, options);
+      const petsFinal = await resPets.json();
+
+      setPets([...pets, ...petsFinal.animals]);
+      setLoadingMore(false);
+    } catch (e) {
+      setLoadingMore(false);
+      setStatus('error');
+      console.log('Oh no, something went wrong', e);
+    }
+  };
+
+  const fetchPets = async (page) => {
+    setStatus('loading');
+    try {
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify(params),
+      };
+      const resPets = await fetch(`/pets/${page}`, options);
+
+      console.log('resPets: ', resPets);
 
       // Checks if response is ok (200)
       if (!resPets.ok) {
@@ -25,26 +68,36 @@ const Results = ({ params }) => {
         return;
       }
 
-      const pets = await resPets.json();
+      const petsFinal = await resPets.json();
+      console.log('pets: ', petsFinal);
 
-      setPets(pets);
-      setStatus('success');
-    }
-
-    try {
-      if (params) {
-        setStatus('loading');
-        fetchPets();
+      if (petsFinal.title === 'Invalid Request') {
+        setStatus('error-location');
+        return;
       }
+
+      setTotalResults(petsFinal.pagination.total_count);
+      setTotalPages(petsFinal.pagination.total_pages);
+      setPets(petsFinal.animals);
+      setStatus('success');
     } catch (e) {
       setStatus('error');
       console.log('Oh no, something went wrong', e);
     }
-  }, [params]);
+  };
 
   const displayPets = () => {
     if (pets.length) {
-      return <PetGrid pets={pets} />;
+      return (
+        <PetGrid
+          pets={pets}
+          totalResults={totalResults}
+          totalPages={totalPages}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          loadingMore={loadingMore}
+        />
+      );
     } else {
       return (
         <Alert
@@ -77,7 +130,15 @@ const Results = ({ params }) => {
       <Alert
         message='Oh no, something went wrong.'
         action='Please try again.'
-        buttonText='Go back.'
+      />
+    );
+  }
+
+  if (status === 'error-location') {
+    return (
+      <Alert
+        message='Sorry, could not determine location.'
+        action='Please try again.'
       />
     );
   }

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { fadeIn } from '../styles/styled-components';
 import { GiDogBowl } from 'react-icons/gi';
 import { MdPets } from 'react-icons/md';
 
@@ -9,6 +10,10 @@ const Heading = () => {
     padding-bottom: 1rem;
     border-bottom: 2px solid hsla(50, 34%, 15%, 0.2);
     text-align: center;
+  `;
+
+  const FadeInDiv = styled.div`
+    animation: ${fadeIn} 1000ms ease-in;
   `;
 
   const Title = styled.h1`
@@ -41,10 +46,12 @@ const Heading = () => {
 
   return (
     <HeadingContainer>
-      <PawIcon />
-      <FoodBowlIcon />
-      <Title>Dog Finder</Title>
-      <Subtitle>Find your ideal companion.</Subtitle>
+      <FadeInDiv>
+        <PawIcon />
+        <FoodBowlIcon />
+        <Title>Dog Finder</Title>
+        <Subtitle>Find your ideal companion.</Subtitle>
+      </FadeInDiv>
     </HeadingContainer>
   );
 };
