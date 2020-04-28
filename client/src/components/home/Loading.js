@@ -32,7 +32,7 @@ const Loading = () => {
           alt='Loading...'
           style={{ mixBlendMode: 'multiply', margin: '1rem 0  0 1.5rem' }}
         />
-        <LoadingText>Loading...</LoadingText>
+        <LoadingText>Finding pets...</LoadingText>
       </GenericContainer>
     )
   );

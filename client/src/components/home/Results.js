@@ -50,7 +50,6 @@ const Results = ({ params }) => {
         <Alert
           message='Sorry, no pets found.'
           action='Want to try a different search?'
-          buttonText='Go back'
         />
       );
     }
@@ -61,8 +60,7 @@ const Results = ({ params }) => {
       return (
         <Alert
           message='Find pets in your area!'
-          action='Enter search input'
-          buttonText='Go back'
+          action='Enter search input above.'
         />
       );
     }

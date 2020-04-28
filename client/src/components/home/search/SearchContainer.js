@@ -183,7 +183,7 @@ const SearchContainer = ({ handleParams }) => {
           value={selectedDistance}
           onChange={handleDistance}
           options={distanceOptions}
-          label='Maximum distance'
+          label='Max. Distance'
         />
         <CustomInput value={zipCode} onChange={handleZipCode} />
         {isZipCodeValid === false && (

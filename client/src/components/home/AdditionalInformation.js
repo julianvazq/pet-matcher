@@ -14,6 +14,7 @@ const ListItem = styled.li`
     font-size: 1rem;
     font-weight: 400;
     margin-bottom: 0.25rem;
+    color: hsl(50, 0%, 35%);
   }
 
   p {
@@ -62,9 +63,11 @@ const List = styled.ul`
     grid-column-gap: ${(props) => (props.expandCard ? '3rem' : '1rem')};
     grid-template-columns: ${(props) =>
       props.expandCard ? '' : 'repeat(2, 1fr)'};
-    grid-template-rows: ${(props) =>
+    /* grid-template-rows: ${(props) =>
       props.expandCard ? 'repeat(3, auto)' : ''};
-    grid-auto-flow: ${(props) => (props.expandCard ? 'column' : '')};
+    grid-auto-flow: ${(props) => (props.expandCard ? 'column' : '')}; */
+    grid-template-columns: ${(props) =>
+      props.expandCard ? 'repeat(3, auto)' : ''};
   }
 `;
 
@@ -78,16 +81,6 @@ const AdditionalInformation = ({ petInfo, visibility, expandCard }) => {
             <p>{petInfo.coat}</p>
           </ListItem>
         )}
-        {petInfo.environment.cats ||
-        petInfo.environment.dogs ||
-        petInfo.environment.children ? (
-          <ListItem>
-            <h2>Good With</h2>
-            {petInfo.environment.dogs && <p>Other dogs</p>}
-            {petInfo.environment.children && <p>Children</p>}
-            {petInfo.environment.cats && <p>Cats</p>}
-          </ListItem>
-        ) : null}
         <ListItem>
           <h2>Mixed</h2>
           {petInfo.breeds.mixed ? <CheckboxIcon /> : <CloseIcon />}
@@ -112,6 +105,16 @@ const AdditionalInformation = ({ petInfo, visibility, expandCard }) => {
           <h2>Shots Up To Date</h2>
           {petInfo.attributes.shots_current ? <CheckboxIcon /> : <CloseIcon />}
         </ListItem>
+        {petInfo.environment.cats ||
+        petInfo.environment.dogs ||
+        petInfo.environment.children ? (
+          <ListItem style={{ gridColumn: 'span 2' }}>
+            <h2>Good With</h2>
+            {petInfo.environment.dogs && <p>• Other dogs</p>}
+            {petInfo.environment.children && <p>• Children</p>}
+            {petInfo.environment.cats && <p>• Cats</p>}
+          </ListItem>
+        ) : null}
       </List>
     </DynamicDiv>
   );

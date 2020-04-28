@@ -6,12 +6,11 @@ const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1rem 0;
-  border-bottom: 1px solid hsla(50,34%,15%,0.2);
+  border-bottom: 1px solid hsla(50, 34%, 15%, 0.2);
 
   @media (min-width: 600px) {
-      flex-direction: row;
-      justify-content: space-between;
-    /* align-items: ${(props) => props.isMulti && 'center'}; */
+    flex-direction: row;
+    justify-content: space-between;
   }
 `;
 
@@ -20,6 +19,7 @@ export const Input = styled.input`
   font-size: 1.25rem;
   border: 1px solid hsl(0, 0%, 80%);
   border-radius: 4px;
+  min-width: 50%;
 
   &:focus {
     border-color: hsla(50, 38%, 88%, 0.7);
