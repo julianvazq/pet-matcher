@@ -119,7 +119,7 @@ const PetGrid = ({
 
   return (
     <>
-      <ResultsInformation showing={pets.length} total={totalResults} />
+      <ResultsInformation showing={filteredPets.length} total={totalResults} />
       <BreedFilter
         value={selectedBreed}
         onChange={handleBreed}
