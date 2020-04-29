@@ -138,7 +138,7 @@ const PetGrid = ({
               )
           )}
       </Grid>
-      {currentPage < totalPages && (
+      {selectedBreed.value === 'All' && currentPage < totalPages && (
         <PaginationButton onClick={() => setCurrentPage(currentPage + 1)}>
           More {loadingMore ? <SpinnerIcon /> : <MoreIcon />}
         </PaginationButton>

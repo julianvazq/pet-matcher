@@ -23,7 +23,13 @@ const Results = ({ params }) => {
     }
   }, [currentPage]);
 
-  useEffect(() => {}, [currentPage]);
+  const removeDuplicates = (firstArray, secondArray) => {
+    const combinedArrays = [...firstArray, ...secondArray];
+    const uniquePets = combinedArrays.filter(
+      (movie, index, self) => index === self.findIndex((m) => m.id === movie.id)
+    );
+    return uniquePets;
+  };
 
   const fetchNextPage = async (page) => {
     setLoadingMore(true);
@@ -39,7 +45,9 @@ const Results = ({ params }) => {
       const resPets = await fetch(`/pets/${page}`, options);
       const petsFinal = await resPets.json();
 
-      setPets([...pets, ...petsFinal.animals]);
+      const uniquePets = removeDuplicates(pets, petsFinal.animals);
+      setPets(uniquePets);
+
       setLoadingMore(false);
     } catch (e) {
       setLoadingMore(false);
