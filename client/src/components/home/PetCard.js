@@ -12,7 +12,7 @@ const PetCard = ({ petInfo, desktopView }) => {
   const handleExpandCard = () => {
     setExpandCard(!expandCard);
   };
-
+  console.log(petInfo);
   useEffect(() => {
     if (!isFirstRender) {
       cardRef.current.scrollIntoView();

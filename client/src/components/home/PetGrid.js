@@ -5,6 +5,7 @@ import useViewportWidth from './useViewportWidth';
 import { MdPets, MdMoreHoriz } from 'react-icons/md';
 import { GiDogBowl } from 'react-icons/gi';
 import { FaSpinner } from 'react-icons/fa';
+import Select from 'react-select';
 
 const Grid = styled.div`
   display: grid;
@@ -25,11 +26,16 @@ const Grid = styled.div`
 
 const ResultsInfoContainer = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
+
+  @media (min-width: 375px) {
+    flex-direction: row;
+  }
 `;
 
 const ResultsInfo = styled.p`
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   font-weight: 600;
   color: hsl(0, 0%, 45%);
 
@@ -81,6 +87,8 @@ const PaginationButton = styled.button`
   box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.07);
 `;
 
+const StyledSelect = styled(Select)``;
+
 const PetGrid = ({
   pets,
   totalResults,
@@ -91,6 +99,15 @@ const PetGrid = ({
 }) => {
   const width = useViewportWidth();
   const [desktopView, setDesktopView] = useState(true);
+  const [breedOptions, setBreedOptions] = useState();
+  const [selectedBreed, setSelectedBreed] = useState({
+    value: 'All',
+    label: 'All',
+  });
+
+  const handleBreed = (selectedBreed) => {
+    setSelectedBreed(selectedBreed);
+  };
 
   useEffect(() => {
     if (width > 1000) {
@@ -100,6 +117,39 @@ const PetGrid = ({
     }
   }, [width]);
 
+  useEffect(() => {
+    const breedOptions = getBreedOptions();
+    setBreedOptions(breedOptions);
+  }, [pets]);
+
+  const getBreedOptions = () => {
+    const breedArrays = pets.map((pet) => [
+      pet.breeds.primary,
+      pet.breeds.secondary,
+    ]);
+    const allBreeds = breedArrays.flat();
+    const uniqueBreeds = [
+      ...new Set(allBreeds.filter((breed) => breed !== null)),
+    ];
+
+    const breedOptions = uniqueBreeds.map((breed) => ({
+      value: breed,
+      label: breed,
+    }));
+    breedOptions.unshift({ value: 'All', label: 'All' });
+
+    return breedOptions;
+  };
+
+  const filteredPets =
+    selectedBreed.value === 'All'
+      ? pets
+      : pets.filter(
+          (pet) =>
+            pet.breeds.primary === selectedBreed.value ||
+            pet.breeds.secondary === selectedBreed.value
+        );
+
   return (
     <>
       <ResultsInfoContainer>
@@ -107,7 +157,7 @@ const PetGrid = ({
           Showing:{' '}
           <span>
             {pets.length}
-            <FoodBowlIcon />
+            <PawIcon />
           </span>
         </ResultsInfo>
         <ResultsInfo>
@@ -118,9 +168,14 @@ const PetGrid = ({
           </span>
         </ResultsInfo>
       </ResultsInfoContainer>
+      <StyledSelect
+        value={selectedBreed}
+        onChange={handleBreed}
+        options={breedOptions}
+      />
       <Grid>
-        {pets &&
-          pets.map(
+        {filteredPets &&
+          filteredPets.map(
             (pet) =>
               pet.photos.length > 0 && (
                 <PetCard key={pet.id} petInfo={pet} desktopView={desktopView} />

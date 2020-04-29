@@ -26,7 +26,7 @@ app.post('/pets/:page', async (req, res) => {
     const TOKEN = dataToken.access_token;
 
     const resPets = await fetch(
-      `https://api.petfinder.com/v2/animals?type=dog&status=adoptable&location=${zipCode}&distance=${distance}&limit=${28}&page=${page}&size=${sizes.join(
+      `https://api.petfinder.com/v2/animals?type=dog&status=adoptable&sort=distance&location=${zipCode}&distance=${distance}&limit=${28}&page=${page}&size=${sizes.join(
         ','
       )}&age=${ages.join(',')}&gender=${genders.join(',')}`,
       {
@@ -41,30 +41,6 @@ app.post('/pets/:page', async (req, res) => {
   } catch (e) {
     console.log(e);
   }
-});
-
-app.get('/:id', async (req, res) => {
-  const resToken = await fetch('https://api.petfinder.com/v2/oauth2/token', {
-    body: `grant_type=client_credentials&client_id=${process.env.API_KEY}&client_secret=${process.env.SECRET}`,
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    method: 'POST',
-  });
-  const dataToken = await resToken.json();
-  const TOKEN = dataToken.access_token;
-
-  const resPet = await fetch(
-    `https://api.petfinder.com/v2/animals/${req.params.id}`,
-    {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-      },
-    }
-  );
-
-  const pet = await resPet.json();
-  res.send(pet);
 });
 
 // app.get('*', (req, res) => {

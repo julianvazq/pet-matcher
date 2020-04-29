@@ -7,10 +7,6 @@ const customStyleMulti = {
   option: (provided, state) => ({
     ...provided,
   }),
-  //   control: () => ({
-  //     // none of react-select's styles are passed to <Control />
-  //     fontWeight: 600,
-  //   }),
   multiValue: (provided, state) => {
     const color = 'black';
     const backgroundColor = 'hsl(50,50%,82%)';
