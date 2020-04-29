@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Heading from './Heading';
 import SearchContainer from './search/SearchContainer';
-import Results from './Results';
+import Results from './results/Results';
 import { PageContainer } from '../styles/styled-components';
 
 const Home = () => {

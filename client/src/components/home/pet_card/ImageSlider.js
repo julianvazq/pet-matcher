@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { fadeIn } from '../styles/styled-components';
+import { fadeIn } from '../../styles/styled-components';
 import {
   IoIosArrowDropleftCircle,
   IoIosArrowDroprightCircle,

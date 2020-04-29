@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import PetInformation from './PetInformation';
 import ImageSlider from './ImageSlider';
-import useIsFirstRender from '../hooks/useIsFirstRender';
+import useIsFirstRender from '../../hooks/useIsFirstRender';
 
 const PetCard = ({ petInfo, desktopView }) => {
   const cardRef = useRef();

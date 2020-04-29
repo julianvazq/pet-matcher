@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Alert from './Alert';
-import Loading from './Loading';
+import Alert from '../Alert';
+import Loading from '../Loading';
 import PetGrid from './PetGrid';
 
 const Results = ({ params }) => {

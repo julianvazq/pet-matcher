@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
-import PetCard from './PetCard';
-import useViewportWidth from './useViewportWidth';
+import PetCard from '../pet_card/PetCard';
+import useViewportWidth from '../../hooks/useViewportWidth';
 import { MdMoreHoriz } from 'react-icons/md';
 import { FaSpinner } from 'react-icons/fa';
-import ResultsInformation from './results/ResultsInformation';
-import BreedFilter from './results/BreedFilter';
+import ResultsInformation from './ResultsInformation';
+import BreedFilter from './BreedFilter';
 
 const Grid = styled.div`
   display: grid;
