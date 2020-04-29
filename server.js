@@ -26,7 +26,7 @@ app.post('/pets/:page', async (req, res) => {
     const TOKEN = dataToken.access_token;
 
     const resPets = await fetch(
-      `https://api.petfinder.com/v2/animals?type=dog&status=adoptable&sort=distance&location=${zipCode}&distance=${distance}&limit=${28}&page=${page}&size=${sizes.join(
+      `https://api.petfinder.com/v2/animals?type=dog&status=adoptable&sort=distance&location=${zipCode}&distance=${distance}&limit=${27}&page=${page}&size=${sizes.join(
         ','
       )}&age=${ages.join(',')}&gender=${genders.join(',')}`,
       {

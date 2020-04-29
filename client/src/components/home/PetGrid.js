@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import PetCard from './PetCard';
 import useViewportWidth from './useViewportWidth';
-import { MdPets, MdMoreHoriz } from 'react-icons/md';
-import { GiDogBowl } from 'react-icons/gi';
+import { MdMoreHoriz } from 'react-icons/md';
 import { FaSpinner } from 'react-icons/fa';
-import Select from 'react-select';
+import ResultsInformation from './results/ResultsInformation';
+import BreedFilter from './results/BreedFilter';
 
 const Grid = styled.div`
   display: grid;
@@ -22,37 +22,6 @@ const Grid = styled.div`
   @media (min-width: 1100px) {
     grid-template-columns: 1fr 1fr 1fr;
   }
-`;
-
-const ResultsInfoContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  @media (min-width: 375px) {
-    flex-direction: row;
-  }
-`;
-
-const ResultsInfo = styled.p`
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: hsl(0, 0%, 45%);
-
-  span {
-    font-weight: 700;
-    color: hsl(50, 12%, 22%);
-  }
-`;
-
-const PawIcon = styled(MdPets)`
-  transform: translateY(2px);
-  margin-left: 0.25rem;
-`;
-
-const FoodBowlIcon = styled(GiDogBowl)`
-  transform: translateY(2px);
-  margin-left: 0.25rem;
 `;
 
 const MoreIcon = styled(MdMoreHoriz)`
@@ -86,8 +55,6 @@ const PaginationButton = styled.button`
   background: hsl(0, 0%, 79%);
   box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.07);
 `;
-
-const StyledSelect = styled(Select)``;
 
 const PetGrid = ({
   pets,
@@ -152,23 +119,8 @@ const PetGrid = ({
 
   return (
     <>
-      <ResultsInfoContainer>
-        <ResultsInfo>
-          Showing:{' '}
-          <span>
-            {pets.length}
-            <PawIcon />
-          </span>
-        </ResultsInfo>
-        <ResultsInfo>
-          Total results:{' '}
-          <span>
-            {totalResults}
-            <PawIcon />
-          </span>
-        </ResultsInfo>
-      </ResultsInfoContainer>
-      <StyledSelect
+      <ResultsInformation showing={pets.length} total={totalResults} />
+      <BreedFilter
         value={selectedBreed}
         onChange={handleBreed}
         options={breedOptions}
@@ -178,7 +130,11 @@ const PetGrid = ({
           filteredPets.map(
             (pet) =>
               pet.photos.length > 0 && (
-                <PetCard key={pet.id} petInfo={pet} desktopView={desktopView} />
+                <PetCard
+                  key={+pet.id + Math.floor(Math.random() * 1000) + 1}
+                  petInfo={pet}
+                  desktopView={desktopView}
+                />
               )
           )}
       </Grid>
