@@ -60,8 +60,6 @@ const Results = ({ params }) => {
       };
       const resPets = await fetch(`/pets/${page}`, options);
 
-      console.log('resPets: ', resPets);
-
       // Checks if response is ok (200)
       if (!resPets.ok) {
         setStatus('error');
@@ -69,7 +67,6 @@ const Results = ({ params }) => {
       }
 
       const petsFinal = await resPets.json();
-      console.log('pets: ', petsFinal);
 
       if (petsFinal.title === 'Invalid Request') {
         setStatus('error-location');

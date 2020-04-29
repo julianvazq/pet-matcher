@@ -81,22 +81,18 @@ const SearchContainer = ({ handleParams }) => {
 
   const handleGenders = (selectedGenders) => {
     setSelectedGenders(selectedGenders);
-    console.log(`Genders:`, selectedGenders);
   };
 
   const handleSizes = (selectedSizes) => {
     setSelectedSizes(selectedSizes);
-    console.log(`Sizes:`, selectedSizes);
   };
 
   const handleAges = (selectedAges) => {
     setSelectedAges(selectedAges);
-    console.log(`Ages:`, selectedAges);
   };
 
   const handleDistance = (selectedDistance) => {
     setSelectedDistance(selectedDistance);
-    console.log(`Max. Distance:`, selectedDistance);
   };
 
   const handleZipCode = (e) => {
@@ -106,7 +102,6 @@ const SearchContainer = ({ handleParams }) => {
     } else {
       setZipCode(e.target.value.slice(0, 5));
     }
-    console.log('Zip Code: ', zipCode);
   };
 
   const handleSubmit = (e) => {

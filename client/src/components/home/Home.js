@@ -8,7 +8,6 @@ const Home = () => {
   const resultsRef = useRef();
   const [params, setParams] = useState(null);
 
-  console.log('params: ', params);
   const handleParams = (newParams) => {
     setParams(newParams);
   };
