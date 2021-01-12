@@ -1,4 +1,4 @@
-# Pet Matcher / Dog Finder
+# Dog Finder
 
 This application allows you to find dogs up for adoption in your area.
 
